@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  name      String?
+  email     String    @unique
+  password  String
+  trips     Trip[]
+  expenses  Expense[]
+  createdAt DateTime  @default(now())
+}
+
+model Trip {
+  id          String     @id @default(cuid())
+  title       String
+  destination String
+  startDate   DateTime
+  endDate     DateTime
+  isPublic    Boolean    @default(false)
+
+  userId      String
+  user        User       @relation(fields: [userId], references: [id])
+
+  expenses    Expense[]
+
+  createdAt   DateTime   @default(now())
+}
+
+model Expense {
+  id           String    @id @default(cuid())
+  title        String
+  amount       Float
+  category     String
+  notes        String?
+  expenseDate  DateTime
+  isPublic     Boolean   @default(false)
+
+  tripId       String?
+  trip         Trip?     @relation(fields: [tripId], references: [id])
+
+  userId       String
+  user         User      @relation(fields: [userId], references: [id])
+
+  createdAt    DateTime  @default(now())
+}
