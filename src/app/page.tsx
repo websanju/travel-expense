@@ -1,44 +1,63 @@
-async function getExpenses() {
-  const base = process.env.NEXT_PUBLIC_BASE_URL || `http://localhost:${process.env.PORT || 3001}`;
+import { prisma } from "@/lib/prisma";
 
-  const res = await fetch(`${base}/api/public-expenses`, {
-    cache: "no-store",
-  });
+export const dynamic = "force-dynamic";
 
-  if (!res.ok) {
-    // Return a helpful error instead of trying to parse HTML error pages as JSON
-    const text = await res.text();
-    throw new Error(`Failed to load expenses: ${res.status} ${text}`);
-  }
-
-  return res.json();
-}
+type ExpenseItem = {
+  id: string;
+  title: string;
+  amount: number;
+  category: string | null;
+};
 
 export default async function HomePage() {
-  const expenses = await getExpenses();
+  const expenses =
+    await prisma.expense.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
 
   return (
-    <div className="p-10">
-      <h1 className="text-4xl font-bold mb-6">
+    <div className="max-w-7xl mx-auto p-6 pt-[100px]">
+      <h1 className="text-4xl font-bold mb-8">
         Public Travel Expenses
       </h1>
 
-      <div className="space-y-4">
-        {expenses.map((expense: { id: string; title: string; amount: string; category: string }) => (
-          <div
-            key={expense.id}
-            className="border p-4 rounded"
-          >
-            <h2 className="font-bold">
-              {expense.title}
-            </h2>
+      {expenses.length === 0 ? (
+        <div className="border rounded-2xl p-8 text-center text-zinc-500">
+          No expenses found
+        </div>
+      ) : (
+        <div className="grid gap-4">
+          {expenses.map(
+            (expense: ExpenseItem) => (
+              <div
+                key={expense.id}
+                className="
+                  border
+                  border-zinc-800
+                  rounded-2xl
+                  p-5
+                  bg-zinc-900
+                "
+              >
+                <h2 className="font-bold text-xl">
+                  {expense.title}
+                </h2>
 
-            <p>₹{expense.amount}</p>
+                <p className="mt-2 text-green-500 font-semibold">
+                  ₹{expense.amount}
+                </p>
 
-            <p>{expense.category}</p>
-          </div>
-        ))}
-      </div>
+                <p className="mt-1 text-zinc-400">
+                  {expense.category ||
+                    "Uncategorized"}
+                </p>
+              </div>
+            )
+          )}
+        </div>
+      )}
     </div>
   );
 }
