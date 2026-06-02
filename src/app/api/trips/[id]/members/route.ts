@@ -1,22 +1,81 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { auth as getAuth } from "@/auth";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  {
+    params,
+  }: {
+    params: Promise<{ id: string }>;
+  }
 ) {
   try {
     const { id } = await params;
 
-    const members = await prisma.tripMember.findMany({
-      where: {
-        tripId: id,
-      },
-    });
+    const session = await getAuth();
+
+    if (!session?.user?.email) {
+      return Response.json(
+        {
+          error: "Unauthorized",
+        },
+        {
+          status: 401,
+        }
+      );
+    }
+
+    const user =
+      await prisma.user.findUnique({
+        where: {
+          email: session.user.email,
+        },
+      });
+
+    if (!user) {
+      return Response.json(
+        {
+          error: "User not found",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+
+    const trip =
+      await prisma.trip.findFirst({
+        where: {
+          id,
+          userId: user.id,
+        },
+      });
+
+    if (!trip) {
+      return Response.json(
+        {
+          error: "Forbidden",
+        },
+        {
+          status: 403,
+        }
+      );
+    }
+
+    const members =
+      await prisma.tripMember.findMany({
+        where: {
+          tripId: id,
+        },
+      });
 
     return Response.json(members);
   } catch (error) {
-    console.error("GET MEMBERS ERROR:", error);
+    console.error(
+      "GET MEMBERS ERROR:",
+      error
+    );
 
     return Response.json(
       {
@@ -34,10 +93,64 @@ export async function GET(
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  {
+    params,
+  }: {
+    params: Promise<{ id: string }>;
+  }
 ) {
   try {
     const { id } = await params;
+
+    const session = await getAuth();
+
+    if (!session?.user?.email) {
+      return Response.json(
+        {
+          error: "Unauthorized",
+        },
+        {
+          status: 401,
+        }
+      );
+    }
+
+    const user =
+      await prisma.user.findUnique({
+        where: {
+          email: session.user.email,
+        },
+      });
+
+    if (!user) {
+      return Response.json(
+        {
+          error: "User not found",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+
+    const trip =
+      await prisma.trip.findFirst({
+        where: {
+          id,
+          userId: user.id,
+        },
+      });
+
+    if (!trip) {
+      return Response.json(
+        {
+          error: "Forbidden",
+        },
+        {
+          status: 403,
+        }
+      );
+    }
 
     const body = await req.json();
 
@@ -52,20 +165,20 @@ export async function POST(
       );
     }
 
-    const member = await prisma.tripMember.create({
-      data: {
-        name: body.name,
-        trip: {
-          connect: {
-            id,
-          },
+    const member =
+      await prisma.tripMember.create({
+        data: {
+          name: body.name,
+          tripId: id,
         },
-      },
-    });
+      });
 
     return Response.json(member);
   } catch (error) {
-    console.error("ADD MEMBER ERROR:", error);
+    console.error(
+      "ADD MEMBER ERROR:",
+      error
+    );
 
     return Response.json(
       {
