@@ -24,7 +24,7 @@ export default async function HomePage() {
       </h1>
 
       <div className="space-y-4">
-        {expenses.map((expense: any) => (
+        {expenses.map((expense: { id: string; title: string; amount: string; category: string }) => (
           <div
             key={expense.id}
             className="border p-4 rounded"

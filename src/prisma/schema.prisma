@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -12,41 +12,61 @@ model User {
   name      String?
   email     String    @unique
   password  String
+
+  phone     String?
+  image      String?
+
   trips     Trip[]
   expenses  Expense[]
+
   createdAt DateTime  @default(now())
 }
 
 model Trip {
-  id          String     @id @default(cuid())
+  id          String   @id @default(cuid())
   title       String
   destination String
   startDate   DateTime
   endDate     DateTime
-  isPublic    Boolean    @default(false)
+  isPublic    Boolean  @default(false)
 
-  userId      String
-  user        User       @relation(fields: [userId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
-  expenses    Expense[]
+  members  TripMember[]
+  expenses Expense[]
 
-  createdAt   DateTime   @default(now())
+  createdAt DateTime @default(now())
+}
+
+model TripMember {
+  id String @id @default(cuid())
+
+  name String
+
+  tripId String
+  trip   Trip   @relation(fields: [tripId], references: [id])
+
+  expenses Expense[]
 }
 
 model Expense {
-  id           String    @id @default(cuid())
-  title        String
-  amount       Float
-  category     String
-  notes        String?
-  expenseDate  DateTime
-  isPublic     Boolean   @default(false)
+  id          String   @id @default(cuid())
+  title       String
+  amount      Float
+  category    String
+  notes       String?
+  expenseDate DateTime
+  isPublic    Boolean  @default(false)
 
-  tripId       String?
-  trip         Trip?     @relation(fields: [tripId], references: [id])
+  tripId String
+  trip   Trip   @relation(fields: [tripId], references: [id])
 
-  userId       String
-  user         User      @relation(fields: [userId], references: [id])
+  paidById String?
+  paidBy   TripMember? @relation(fields: [paidById], references: [id])
 
-  createdAt    DateTime  @default(now())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
 }

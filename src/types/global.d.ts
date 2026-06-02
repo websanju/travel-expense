@@ -1,13 +1,19 @@
-declare module 'dotenv/config';
+declare module "dotenv/config";
 
-declare module 'prisma/config' {
-  export function defineConfig(arg: any): any;
-  export function env(name: string): string;
-  const _default: any;
-  export default _default;
+declare module "prisma/config" {
+  export function defineConfig<T>(arg: T): T;
+
+  export function env(
+    name: string
+  ): string;
+
+  const config: unknown;
+
+  export default config;
 }
 
-declare module '@prisma/client/runtime/library' {
-  const whatever: any;
-  export default whatever;
+declare module "@prisma/client/runtime/library" {
+  const runtimeLibrary: unknown;
+
+  export default runtimeLibrary;
 }
