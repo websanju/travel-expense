@@ -2,15 +2,22 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function RegisterPage() {
   const router = useRouter();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] =
+    useState("");
 
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] =
+    useState("");
+
+  const [password, setPassword] =
+    useState("");
+
+  const [loading, setLoading] =
+    useState(false);
 
   async function handleRegister(
     e: React.FormEvent
@@ -53,56 +60,177 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="max-w-md mx-auto p-10">
-      <h1 className="text-3xl font-bold mb-6">
-        Register
-      </h1>
-
-      <form
-        onSubmit={handleRegister}
-        className="space-y-4"
+    <div className="flex items-center justify-center px-6 pt-[200px] pb-10">
+      <div
+        className="
+          w-full
+          max-w-md
+          bg-zinc-900
+          border
+          border-zinc-800
+          rounded-[32px]
+          p-8
+          shadow-2xl
+        "
       >
-        <input
-          className="border p-2 w-full"
-          placeholder="Name"
-          value={name}
-          onChange={(e) =>
-            setName(e.target.value)
-          }
-        />
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div
+            className="
+              w-20
+              h-20
+              mx-auto
+              rounded-3xl
+              bg-gradient-to-br
+              from-purple-600
+              to-blue-600
+              flex
+              items-center
+              justify-center
+              text-4xl
+              mb-5
+            "
+          >
+            ✈️
+          </div>
 
-        <input
-          className="border p-2 w-full"
-          placeholder="Email"
-          type="email"
-          value={email}
-          onChange={(e) =>
-            setEmail(e.target.value)
-          }
-        />
+          <h1 className="text-4xl font-bold">
+            Create Account
+          </h1>
 
-        <input
-          className="border p-2 w-full"
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) =>
-            setPassword(
-              e.target.value
-            )
-          }
-        />
+          <p className="text-zinc-400 mt-2">
+            Start managing your travel
+            expenses today
+          </p>
+        </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-black text-white px-4 py-2 w-full"
+        {/* Form */}
+        <form
+          onSubmit={handleRegister}
+          className="space-y-5"
         >
-          {loading
-            ? "Registering..."
-            : "Register"}
-        </button>
-      </form>
+          <div>
+            <label className="block text-sm text-zinc-400 mb-2">
+              Full Name
+            </label>
+
+            <input
+              value={name}
+              onChange={(e) =>
+                setName(e.target.value)
+              }
+              placeholder="John Doe"
+              className="
+                w-full
+                bg-zinc-800
+                border
+                border-zinc-700
+                rounded-2xl
+                px-4
+                py-3
+                outline-none
+                focus:border-purple-500
+              "
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-zinc-400 mb-2">
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              value={email}
+              onChange={(e) =>
+                setEmail(e.target.value)
+              }
+              placeholder="john@example.com"
+              className="
+                w-full
+                bg-zinc-800
+                border
+                border-zinc-700
+                rounded-2xl
+                px-4
+                py-3
+                outline-none
+                focus:border-purple-500
+              "
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-zinc-400 mb-2">
+              Password
+            </label>
+
+            <input
+              type="password"
+              value={password}
+              onChange={(e) =>
+                setPassword(
+                  e.target.value
+                )
+              }
+              placeholder="••••••••"
+              className="
+                w-full
+                bg-zinc-800
+                border
+                border-zinc-700
+                rounded-2xl
+                px-4
+                py-3
+                outline-none
+                focus:border-purple-500
+              "
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="
+              w-full
+              py-3
+              rounded-2xl
+              bg-gradient-to-r
+              from-purple-600
+              to-blue-600
+              text-white
+              font-semibold
+              shadow-lg
+              hover:scale-[1.02]
+              transition
+            "
+          >
+            {loading
+              ? "Creating Account..."
+              : "Create Account"}
+          </button>
+        </form>
+
+        {/* Footer */}
+        <div className="mt-8 text-center">
+          <p className="text-zinc-400">
+            Already have an account?
+          </p>
+
+          <Link
+            href="/login"
+            className="
+              inline-block
+              mt-3
+              text-purple-400
+              hover:text-purple-300
+              font-medium
+            "
+          >
+            Login Instead →
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
