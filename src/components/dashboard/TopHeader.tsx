@@ -43,12 +43,13 @@ export default async function TopHeader() {
           </Link>
 
           {/* User */}
-          <UserDropdown
-            name={user?.name || "User"}
-            email={user?.email || ""}
-            phone={user?.phone || ""}
-            image={user?.image || ""}
-          />
+         <UserDropdown
+  isLoggedIn={!!session?.user}
+  name={user?.name || ""}
+  email={user?.email || ""}
+  phone={user?.phone || ""}
+  image={user?.image || ""}
+/>
         </div>
       </div>
     </header>

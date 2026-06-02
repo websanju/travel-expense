@@ -6,22 +6,27 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 
 export default function UserDropdown({
+  isLoggedIn,
   name,
   email,
   phone,
   image,
 }: {
-  name: string;
-  email: string;
+  isLoggedIn: boolean;
+  name?: string;
+  email?: string;
   phone?: string;
   image?: string;
 }) {
   const [open, setOpen] =
     useState(false);
 
+  const displayName =
+    name || "Guest";
+
   return (
     <div className="relative">
-      {/* Avatar Button */}
+      {/* Avatar */}
       <button
         onClick={() =>
           setOpen(!open)
@@ -33,18 +38,21 @@ export default function UserDropdown({
           overflow-hidden
           border
           border-zinc-700
-          bg-purple-600
+          bg-gradient-to-br
+          from-purple-600
+          to-blue-600
           flex
           items-center
           justify-center
-          font-bold
           text-white
+          font-bold
+          shadow-lg
         "
       >
         {image ? (
           <Image
             src={image}
-            alt={name}
+            alt={displayName}
             width={48}
             height={48}
             className="
@@ -55,7 +63,7 @@ export default function UserDropdown({
           />
         ) : (
           <span>
-            {name
+            {displayName
               .charAt(0)
               .toUpperCase()}
           </span>
@@ -85,7 +93,7 @@ export default function UserDropdown({
               {image ? (
                 <Image
                   src={image}
-                  alt={name}
+                  alt={displayName}
                   width={64}
                   height={64}
                   className="
@@ -101,7 +109,9 @@ export default function UserDropdown({
                     w-16
                     h-16
                     rounded-full
-                    bg-purple-600
+                    bg-gradient-to-br
+                    from-purple-600
+                    to-blue-600
                     text-white
                     flex
                     items-center
@@ -110,7 +120,7 @@ export default function UserDropdown({
                     font-bold
                   "
                 >
-                  {name
+                  {displayName
                     .charAt(0)
                     .toUpperCase()}
                 </div>
@@ -118,11 +128,15 @@ export default function UserDropdown({
 
               <div>
                 <div className="font-bold text-lg">
-                  {name}
+                  {isLoggedIn
+                    ? displayName
+                    : "Guest User"}
                 </div>
 
                 <div className="text-sm text-gray-500">
-                  {email}
+                  {isLoggedIn
+                    ? email
+                    : "Please Login"}
                 </div>
 
                 {phone && (
@@ -136,68 +150,101 @@ export default function UserDropdown({
 
           {/* Menu */}
           <div className="p-2">
-            <Link
-              href="/profile"
-              className="
-                block
-                px-4
-                py-3
-                rounded-xl
-                hover:bg-gray-100
-                transition
-              "
-            >
-              👤 Profile
-            </Link>
+            {isLoggedIn ? (
+              <>
+                <Link
+                  href="/profile"
+                  className="
+                    block
+                    px-4
+                    py-3
+                    rounded-xl
+                    hover:bg-gray-100
+                    transition
+                  "
+                >
+                  👤 Profile
+                </Link>
 
-            <Link
-              href="/trips"
-              className="
-                block
-                px-4
-                py-3
-                rounded-xl
-                hover:bg-gray-100
-                transition
-              "
-            >
-              ✈️ My Trips
-            </Link>
+                <Link
+                  href="/dashboard"
+                  className="
+                    block
+                    px-4
+                    py-3
+                    rounded-xl
+                    hover:bg-gray-100
+                    transition
+                  "
+                >
+                  📊 Dashboard
+                </Link>
 
-            <Link
-              href="/dashboard"
-              className="
-                block
-                px-4
-                py-3
-                rounded-xl
-                hover:bg-gray-100
-                transition
-              "
-            >
-              📊 Dashboard
-            </Link>
+                <Link
+                  href="/trips"
+                  className="
+                    block
+                    px-4
+                    py-3
+                    rounded-xl
+                    hover:bg-gray-100
+                    transition
+                  "
+                >
+                  ✈️ My Trips
+                </Link>
 
-            <button
-              onClick={() =>
-                signOut({
-                  callbackUrl: "/login",
-                })
-              }
-              className="
-                block
-                w-full
-                text-left
-                px-4
-                py-3
-                rounded-xl
-                text-red-600
-                hover:bg-red-50
-                transition
-              "
-            >
-               👤 Logout
-            </button>
+                <button
+                  onClick={() =>
+                    signOut({
+                      callbackUrl: "/",
+                    })
+                  }
+                  className="
+                    w-full
+                    text-left
+                    px-4
+                    py-3
+                    rounded-xl
+                    text-red-600
+                    hover:bg-red-50
+                    transition
+                  "
+                >
+                  🚪 Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="
+                    block
+                    px-4
+                    py-3
+                    rounded-xl
+                    hover:bg-gray-100
+                    transition
+                  "
+                >
+                  🔑 Login
+                </Link>
+
+                <Link
+                  href="/register"
+                  className="
+                    block
+                    px-4
+                    py-3
+                    rounded-xl
+                    hover:bg-gray-100
+                    transition
+                  "
+                >
+                  ✨ Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}
