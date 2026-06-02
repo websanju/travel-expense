@@ -290,11 +290,34 @@ export default async function TripsPage() {
 }
 
   // Logged-in User View
-  const trips = await prisma.trip.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  // const trips = await prisma.trip.findMany({
+  //   orderBy: {
+  //     createdAt: "desc",
+  //   },
+  // });
+
+  const user = await prisma.user.findUnique({
+  where: {
+    email: session.user.email,
+  },
+});
+
+if (!user) {
+  return <div>User not found</div>;
+}
+
+const trips = await prisma.trip.findMany({
+  where: {
+    userId: user.id,
+  },
+  include: {
+    members: true,
+    expenses: true,
+  },
+  orderBy: {
+    createdAt: "desc",
+  },
+});
 
   return (
     <div className="pt-[10px]">

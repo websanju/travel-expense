@@ -3,6 +3,7 @@ import AddMember from "@/components/AddMember";
 import DeleteTripButton from "@/components/DeleteTripButton";
 import AddExpense from "@/components/AddExpense";
 import Link from "next/link";
+import { auth as getAuth } from "@/auth";
 export default async function TripPage({
   params,
 }: {
@@ -20,29 +21,68 @@ export default async function TripPage({
     );
   }
 
-  const trip = await prisma.trip.findUnique({
-    where: {
-      id,
-    },
-    include: {
-      members: true,
-      expenses: {
-        include: {
-          paidBy: true,
-        },
+  
+const session = await getAuth();
+
+if (!session?.user?.email) {
+  return <div>Unauthorized</div>;
+}
+
+const user = await prisma.user.findUnique({
+  where: {
+    email: session.user.email,
+  },
+});
+
+if (!user) {
+  return <div>User not found</div>;
+}
+
+const trip = await prisma.trip.findFirst({
+  where: {
+    id,
+    userId: user.id,
+  },
+  include: {
+    members: true,
+    expenses: {
+      include: {
+        paidBy: true,
       },
     },
-  });
+  },
+});
 
-  if (!trip) {
-    return (
-      <div className="p-10">
-        <h1 className="text-2xl font-bold">
-          Trip not found
-        </h1>
-      </div>
-    );
-  }
+if (!trip) {
+  return (
+    <div className="p-10">
+      Trip not found
+    </div>
+  );
+}
+  // const trip = await prisma.trip.findUnique({
+  //   where: {
+  //     id,
+  //   },
+  //   include: {
+  //     members: true,
+  //     expenses: {
+  //       include: {
+  //         paidBy: true,
+  //       },
+  //     },
+  //   },
+  // });
+
+  // if (!trip) {
+  //   return (
+  //     <div className="p-10">
+  //       <h1 className="text-2xl font-bold">
+  //         Trip not found
+  //       </h1>
+  //     </div>
+  //   );
+  // }
 
 const totalExpense = trip.expenses.reduce(
   (sum: number, expense: { amount: number }) =>
