@@ -9,12 +9,94 @@ export default async function DashboardPage() {
   const session = await getAuth();
 
   if (!session?.user?.email) {
-    return (
-      <div className="p-10">
-        Unauthorized
+  return (
+    <div className="max-w-7xl mx-auto px-6 pt-[120px]">
+      <div className="relative overflow-hidden rounded-[40px] bg-gradient-to-br from-purple-600 via-violet-600 to-blue-600 p-10 md:p-16">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,white,transparent_40%)] opacity-20" />
+
+        <div className="relative z-10 text-center">
+          <div className="text-6xl mb-6">
+            ✈️
+          </div>
+
+          <h1 className="text-5xl font-bold text-white">
+            Travel Expense Manager
+          </h1>
+
+          <p className="text-white/80 text-xl mt-5 max-w-2xl mx-auto">
+            Track trip expenses, split bills with
+            friends, manage settlements and keep
+            your travel budget under control.
+          </p>
+
+          <div className="flex justify-center gap-4 mt-8">
+            <a
+              href="/login"
+              className="bg-white text-black px-6 py-3 rounded-2xl font-semibold"
+            >
+              Login
+            </a>
+
+            <a
+              href="/register"
+              className="border border-white text-white px-6 py-3 rounded-2xl font-semibold"
+            >
+              Create Account
+            </a>
+          </div>
+        </div>
       </div>
-    );
-  }
+
+      {/* Features */}
+      <div className="grid md:grid-cols-3 gap-6 mt-10">
+        <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+          <div className="text-4xl mb-4">
+            👥
+          </div>
+
+          <h3 className="text-xl font-bold mb-2">
+            Manage Members
+          </h3>
+
+          <p className="text-zinc-400">
+            Add friends and track expenses
+            for every traveler.
+          </p>
+        </div>
+
+        <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+          <div className="text-4xl mb-4">
+            💰
+          </div>
+
+          <h3 className="text-xl font-bold mb-2">
+            Track Expenses
+          </h3>
+
+          <p className="text-zinc-400">
+            Record hotels, food, fuel,
+            shopping and transport costs.
+          </p>
+        </div>
+
+        <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+          <div className="text-4xl mb-4">
+            ⚖️
+          </div>
+
+          <h3 className="text-xl font-bold mb-2">
+            Auto Settlement
+          </h3>
+
+          <p className="text-zinc-400">
+            Instantly calculate who owes
+            whom after the trip.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
   const user = await prisma.user.findUnique({
     where: {
