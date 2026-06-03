@@ -5,6 +5,7 @@ import { useState } from "react";
 type Member = {
   id: string;
   name: string;
+  type: "participant" | "member";
 };
 
 export default function AddExpense({
@@ -18,6 +19,7 @@ export default function AddExpense({
   const [amount, setAmount] = useState("");
   const [paidById, setPaidById] =
     useState("");
+
   const [loading, setLoading] =
     useState(false);
 
@@ -61,6 +63,12 @@ export default function AddExpense({
       }
 
       window.location.reload();
+    } catch (error) {
+      console.error(error);
+
+      alert(
+        "Failed to add expense"
+      );
     } finally {
       setLoading(false);
     }
@@ -70,7 +78,20 @@ export default function AddExpense({
     <div>
       {/* Header */}
       <div className="flex items-center gap-3 mb-5">
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-xl">
+        <div
+          className="
+            w-12
+            h-12
+            rounded-2xl
+            bg-gradient-to-br
+            from-green-500
+            to-emerald-600
+            flex
+            items-center
+            justify-center
+            text-xl
+          "
+        >
           💰
         </div>
 
@@ -136,7 +157,7 @@ export default function AddExpense({
           }
         />
 
-        {/* Member Dropdown */}
+        {/* Paid By */}
         <select
           className="
             w-full
@@ -162,10 +183,10 @@ export default function AddExpense({
           </option>
 
           {members.map(
-            (member: Member) => (
+            (member) => (
               <option
-                key={member.id}
-                value={member.id}
+                key={`${member.type}-${member.id}`}
+                value={`${member.type}:${member.id}`}
               >
                 {member.name}
               </option>

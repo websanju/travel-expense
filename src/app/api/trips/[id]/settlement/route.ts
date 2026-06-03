@@ -1,5 +1,41 @@
 import { prisma } from "@/lib/prisma";
 
+type Balance = {
+  name: string;
+  balance: number;
+};
+
+type Settlement = {
+  from: string;
+  to: string;
+  amount: string;
+};
+
+type MemberType = {
+  id: string;
+  name: string;
+};
+
+type ParticipantType = {
+  id: string;
+  user: {
+    name: string | null;
+    email: string;
+  };
+};
+
+type ExpenseType = {
+  amount: number;
+
+  paidByMember: {
+    id: string;
+  } | null;
+
+  paidByParticipant: {
+    id: string;
+  } | null;
+};
+
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -10,11 +46,25 @@ export async function GET(
     where: {
       id,
     },
+
     include: {
       members: true,
+
+      participants: {
+        include: {
+          user: true,
+        },
+      },
+
       expenses: {
         include: {
-          paidBy: true,
+          paidByParticipant: {
+            include: {
+              user: true,
+            },
+          },
+
+          paidByMember: true,
         },
       },
     },
@@ -31,78 +81,111 @@ export async function GET(
     );
   }
 
-  type Member = (typeof trip.members)[number];
-  type Expense = (typeof trip.expenses)[number];
+  const totalExpense =
+    trip.expenses.reduce(
+      (
+        sum: number,
+        expense: ExpenseType
+      ) =>
+        sum +
+        Number(expense.amount),
+      0
+    );
 
-  const totalExpense = trip.expenses.reduce(
-    (
-      sum: number,
-      expense: Expense
-    ) => sum + Number(expense.amount),
-    0
-  );
+  const totalPeople =
+    trip.members.length +
+    trip.participants.length;
 
   const perPerson =
-    trip.members.length > 0
+    totalPeople > 0
       ? totalExpense /
-        trip.members.length
+        totalPeople
       : 0;
 
   const balances: Record<
     string,
-    {
-      name: string;
-      balance: number;
-    }
+    Balance
   > = {};
 
+  // Manual members
   trip.members.forEach(
-    (member: Member) => {
-      balances[String(member.id)] = {
+    (
+      member: MemberType
+    ) => {
+      balances[
+        `member-${member.id}`
+      ] = {
         name: member.name,
         balance: -perPerson,
       };
     }
   );
 
+  // Registered participants
+  trip.participants.forEach(
+    (
+      participant: ParticipantType
+    ) => {
+      balances[
+        `participant-${participant.id}`
+      ] = {
+        name:
+          participant.user.name ??
+          participant.user.email,
+        balance: -perPerson,
+      };
+    }
+  );
+
+  // Expenses
   trip.expenses.forEach(
-    (expense: Expense) => {
+    (
+      expense: ExpenseType
+    ) => {
       if (
-        expense.paidById &&
-        balances[
-          String(
-            expense.paidById
-          )
-        ]
+        expense.paidByMember
       ) {
         balances[
-          String(
-            expense.paidById
-          )
-        ].balance += Number(
-          expense.amount
-        );
+          `member-${expense.paidByMember.id}`
+        ].balance +=
+          Number(
+            expense.amount
+          );
+      }
+
+      if (
+        expense.paidByParticipant
+      ) {
+        balances[
+          `participant-${expense.paidByParticipant.id}`
+        ].balance +=
+          Number(
+            expense.amount
+          );
       }
     }
   );
 
   const creditors =
-    Object.values(balances).filter(
-      (person) =>
-        person.balance > 0
+    Object.values(
+      balances
+    ).filter(
+      (
+        person: Balance
+      ) => person.balance > 0
     );
 
   const debtors =
-    Object.values(balances).filter(
-      (person) =>
-        person.balance < 0
+    Object.values(
+      balances
+    ).filter(
+      (
+        person: Balance
+      ) => person.balance < 0
     );
 
-  const settlements: {
-    from: string;
-    to: string;
-    amount: string;
-  }[] = [];
+  const settlements: Settlement[] =
+    [];
 
   for (const debtor of debtors) {
     let debt = Math.abs(
@@ -139,10 +222,13 @@ export async function GET(
 
   return Response.json({
     trip: trip.title,
+
     totalExpense:
       totalExpense.toFixed(2),
+
     perPerson:
       perPerson.toFixed(2),
+
     settlements,
   });
 }

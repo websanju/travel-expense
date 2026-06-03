@@ -1,5 +1,16 @@
 import { prisma } from "@/lib/prisma";
 
+type Balance = {
+  name: string;
+  balance: number;
+};
+
+type Settlement = {
+  from: string;
+  to: string;
+  amount: string;
+};
+
 export default async function SettlementPage({
   params,
 }: {
@@ -13,9 +24,21 @@ export default async function SettlementPage({
     },
     include: {
       members: true,
+
+      participants: {
+        include: {
+          user: true,
+        },
+      },
+
       expenses: {
         include: {
-          paidBy: true,
+          paidByParticipant: {
+            include: {
+              user: true,
+            },
+          },
+          paidByMember: true,
         },
       },
     },
@@ -26,49 +49,81 @@ export default async function SettlementPage({
   }
 
   const totalExpense = trip.expenses.reduce(
-    (sum: number, expense: { amount: number }) => sum + expense.amount,
+    (sum: any, expense: { amount: any; }) => sum + expense.amount,
     0
   );
 
+  const totalPeople = trip.participants.length;
+
   const perPerson =
-    trip.members.length > 0
-      ? totalExpense / trip.members.length
+    totalPeople > 0
+      ? totalExpense / totalPeople
       : 0;
 
   const balances: Record<
     string,
-    {
-      name: string;
-      balance: number;
-    }
+    Balance
   > = {};
 
-  trip.members.forEach((member: { id: string; name: string }) => {
-    balances[member.id] = {
+  // Manual Members
+  trip.members.forEach((member: { id: any; name: any; }) => {
+    balances[`member-${member.id}`] = {
       name: member.name,
       balance: -perPerson,
     };
   });
 
-  trip.expenses.forEach((expense: { paidById: string; amount: number }) => {
-    balances[
-      expense.paidById
-    ].balance += expense.amount;
-  });
+  // Registered Participants
+  trip.participants.forEach(
+    (participant: { id: any; user: { name: any; email: any; }; }) => {
+      balances[
+        `participant-${participant.id}`
+      ] = {
+        name:
+          participant.user.name ??
+          participant.user.email,
+        balance: -perPerson,
+      };
+    }
+  );
 
-  const creditors = Object.values(
-    balances
-  ).filter((p: { balance: number }) => p.balance > 0);
+  // Expenses
+  trip.expenses.forEach(
+    (expense: { paidByMember: { id: any; }; amount: number; paidByParticipant: { id: any; }; }) => {
+      if (expense.paidByMember) {
+        balances[
+          `member-${expense.paidByMember.id}`
+        ].balance += expense.amount;
+      }
 
-  const debtors = Object.values(
-    balances
-  ).filter((p: { balance: number }) => p.balance < 0);
+      if (
+        expense.paidByParticipant
+      ) {
+        balances[
+          `participant-${expense.paidByParticipant.id}`
+        ].balance += expense.amount;
+      }
+    }
+  );
 
-  const settlements: {
-    from: string;
-    to: string;
-    amount: string;
-  }[] = [];
+  const creditors =
+    Object.values(
+      balances
+    ).filter(
+      (person) =>
+        person.balance > 0
+    );
+
+  const debtors =
+    Object.values(
+      balances
+    ).filter(
+      (person) =>
+        person.balance < 0
+    );
+
+  const settlements: Settlement[] =
+    [];
 
   for (const debtor of debtors) {
     let debt = Math.abs(
@@ -80,8 +135,9 @@ export default async function SettlementPage({
 
       if (
         creditor.balance <= 0
-      )
+      ) {
         continue;
+      }
 
       const amount = Math.min(
         debt,
@@ -101,12 +157,12 @@ export default async function SettlementPage({
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-8">
+    <div className="max-w-4xl mx-auto p-8">
       <h1 className="text-4xl font-bold mb-6">
         Settlement
       </h1>
 
-      <div className="border p-4 rounded mb-6">
+      <div className="border rounded-xl p-5 mb-6">
         <div>
           Trip:
           <strong>
@@ -123,6 +179,14 @@ export default async function SettlementPage({
             {totalExpense.toFixed(
               2
             )}
+          </strong>
+        </div>
+
+        <div>
+          Total People:
+          <strong>
+            {" "}
+            {totalPeople}
           </strong>
         </div>
 
@@ -149,21 +213,37 @@ export default async function SettlementPage({
       ) : (
         <div className="space-y-3">
           {settlements.map(
-            (s, index) => (
+            (
+              settlement,
+              index
+            ) => (
               <div
                 key={index}
-                className="border rounded p-4"
+                className="
+                  border
+                  rounded-xl
+                  p-4
+                  bg-zinc-900
+                "
               >
                 <strong>
-                  {s.from}
+                  {
+                    settlement.from
+                  }
                 </strong>
+
                 {" pays "}
+
                 <strong>
-                  {s.to}
+                  {settlement.to}
                 </strong>
+
                 {" ₹"}
+
                 <strong>
-                  {s.amount}
+                  {
+                    settlement.amount
+                  }
                 </strong>
               </div>
             )

@@ -4,6 +4,7 @@ import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import ExpenseChart from "@/components/dashboard/ExpenseChart";
 import RecentExpenses from "@/components/dashboard/RecentExpenses";
 import BottomNavigation from "@/components/dashboard/BottomNavigation";
+import Link from "next/link";
 
 export default async function DashboardPage() {
   const session = await getAuth();
@@ -224,25 +225,50 @@ const totalMembers = trips.reduce(
       <div className="max-w-7xl mx-auto p-6 pb-28 pt-[100px]">
         {/* Hero */}
         <div className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-violet-600 via-purple-600 to-blue-600 p-8 shadow-2xl">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,white,transparent_35%)] opacity-20" />
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,white,transparent_35%)] opacity-20" />
 
-          <div className="relative z-10">
-            <p className="text-white/80 text-sm font-medium">
-              Welcome Back 👋
-            </p>
+  <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+    {/* Left Content */}
+    <div>
+      <p className="text-white/80 text-sm font-medium">
+        Welcome Back 👋
+      </p>
 
-            <h1 className="text-4xl md:text-5xl font-bold text-white mt-2">
-              {user.name}
-            </h1>
+      <h1 className="text-4xl md:text-5xl font-bold text-white mt-2">
+        {user.name}
+      </h1>
 
-            <p className="text-white/70 mt-3">
-              Manage trips,
-              expenses and
-              settlements in one
-              place.
-            </p>
-          </div>
-        </div>
+      <p className="text-white/70 mt-3 max-w-xl">
+        Manage trips, expenses and
+        settlements in one place.
+      </p>
+    </div>
+
+    {/* Right Button */}
+    {trips.length === 0 && (
+  <Link
+    href="/trips/new"
+    className="
+      inline-flex
+      items-center
+      z-10
+      mt-2
+      gap-2
+      px-6
+      py-3
+      rounded-2xl
+      bg-white
+      text-black
+      relative
+      font-semibold
+    "
+  >
+    ➕ Create Your Trip
+  </Link>
+)}
+  </div>
+</div>
+        
 
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
