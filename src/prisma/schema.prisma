@@ -8,90 +8,69 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(cuid())
-  name     String?
-  email    String  @unique
-  password String
-
-  phone String  @unique
-  image String?
-
-  trips        Trip[]
+  id           String            @id @default(cuid())
+  name         String?
+  email        String            @unique
+  password     String
+  phone        String            @unique
+  image        String?
+  createdAt    DateTime          @default(now())
   expenses     Expense[]
+  trips        Trip[]
   participants TripParticipant[]
-
-  createdAt DateTime @default(now())
 }
 
 model Trip {
-  id          String   @id @default(cuid())
-  title       String
-  destination String
-  startDate   DateTime
-  endDate     DateTime
-  isPublic    Boolean  @default(false)
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  members      TripMember[]
+  id           String            @id @default(cuid())
+  title        String
+  destination  String
+  startDate    DateTime
+  endDate      DateTime
+  isPublic     Boolean           @default(false)
+  userId       String
+  createdAt    DateTime          @default(now())
   expenses     Expense[]
+  user         User              @relation(fields: [userId], references: [id])
+  members      TripMember[]
   participants TripParticipant[]
-
-  createdAt DateTime @default(now())
 }
 
 model TripMember {
-  id String @id @default(cuid())
-
-  name String
-
-  tripId String
-  trip   Trip   @relation(fields: [tripId], references: [id])
-
+  id       String    @id @default(cuid())
+  name     String
+  tripId   String
   expenses Expense[] @relation("ExpenseMember")
+  trip     Trip      @relation(fields: [tripId], references: [id])
 }
 
 model TripParticipant {
-  id String @id @default(cuid())
-
-  tripId String
-  trip   Trip   @relation(fields: [tripId], references: [id])
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  role String @default("member")
-
-  expenses Expense[] @relation("ExpenseParticipant")
-
-  createdAt DateTime @default(now())
+  id        String    @id @default(cuid())
+  tripId    String
+  userId    String
+  role      String    @default("member")
+  createdAt DateTime  @default(now())
+  expenses  Expense[] @relation("ExpenseParticipant")
+  trip      Trip      @relation(fields: [tripId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
 
   @@unique([tripId, userId])
 }
 
 model Expense {
-  id          String   @id @default(cuid())
-  title       String
-  amount      Float
-  category    String
-  notes       String?
-  expenseDate DateTime
-  isPublic    Boolean  @default(false)
-
-  tripId String
-  trip   Trip   @relation(fields: [tripId], references: [id])
-
-  // Registered user participant
+  id                  String           @id @default(cuid())
+  title               String
+  amount              Float
+  category            String
+  notes               String?
+  expenseDate         DateTime
+  isPublic            Boolean          @default(false)
+  tripId              String
   paidByParticipantId String?
+  paidByMemberId      String?
+  userId              String
+  createdAt           DateTime         @default(now())
+  paidByMember        TripMember?      @relation("ExpenseMember", fields: [paidByMemberId], references: [id])
   paidByParticipant   TripParticipant? @relation("ExpenseParticipant", fields: [paidByParticipantId], references: [id])
-
-  // Manual member
-  paidByMemberId String?
-  paidByMember   TripMember? @relation("ExpenseMember", fields: [paidByMemberId], references: [id])
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  createdAt DateTime @default(now())
+  trip                Trip             @relation(fields: [tripId], references: [id])
+  user                User             @relation(fields: [userId], references: [id])
 }

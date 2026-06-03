@@ -9,10 +9,18 @@ type UserResult = {
   phone: string;
 };
 
+type ExistingParticipant = {
+  userId: string;
+};
+
 export default function AddParticipant({
   tripId,
+  participants,
+  currentUserId,
 }: {
   tripId: string;
+  participants: ExistingParticipant[];
+  currentUserId: string;
 }) {
   const [phone, setPhone] =
     useState("");
@@ -23,12 +31,19 @@ export default function AddParticipant({
   const [loading, setLoading] =
     useState(false);
 
+  const [message, setMessage] =
+    useState("");
+
   async function searchUsers() {
     if (!phone.trim()) {
+      setMessage(
+        "Please enter a phone number"
+      );
       return;
     }
 
     setLoading(true);
+    setMessage("");
 
     try {
       const res = await fetch(
@@ -36,13 +51,20 @@ export default function AddParticipant({
       );
 
       const data =
-        await res.json();
+        (await res.json()) as UserResult[];
 
       setUsers(data);
+
+      if (data.length === 0) {
+        setMessage(
+          "❌ No user found with this phone number"
+        );
+      }
     } catch (error) {
       console.error(error);
-      alert(
-        "Failed to search users"
+
+      setMessage(
+        "❌ Failed to search users"
       );
     } finally {
       setLoading(false);
@@ -68,7 +90,9 @@ export default function AddParticipant({
       );
 
       const data =
-        await res.json();
+        (await res.json()) as {
+          error?: string;
+        };
 
       if (!res.ok) {
         alert(
@@ -85,6 +109,7 @@ export default function AddParticipant({
       window.location.reload();
     } catch (error) {
       console.error(error);
+
       alert(
         "Something went wrong"
       );
@@ -136,6 +161,7 @@ export default function AddParticipant({
             bg-purple-600
             text-white
             font-semibold
+            disabled:opacity-50
           "
         >
           {loading
@@ -144,10 +170,35 @@ export default function AddParticipant({
         </button>
       </div>
 
+      {message && (
+        <div
+          className="
+            mt-4
+            p-3
+            rounded-xl
+            bg-zinc-800
+            border
+            border-zinc-700
+            text-sm
+          "
+        >
+          {message}
+        </div>
+      )}
+
       {users.length > 0 && (
         <div className="mt-6 space-y-3">
-          {users.map(
-            (user) => (
+          {users.map((user) => {
+            const alreadyAdded =
+              participants.some(
+                (
+                  participant
+                ) =>
+                  participant.userId ===
+                  user.id
+              );
+
+            return (
               <div
                 key={user.id}
                 className="
@@ -175,26 +226,56 @@ export default function AddParticipant({
                   </div>
                 </div>
 
-                <button
-                  onClick={() =>
-                    addToTrip(
-                      user.id
-                    )
-                  }
-                  className="
-                    px-4
-                    py-2
-                    rounded-xl
-                    bg-green-600
-                    text-white
-                    font-medium
-                  "
-                >
-                  Add
-                </button>
+                {user.id ===
+                currentUserId ? (
+                  <span
+                    className="
+                      px-4
+                      py-2
+                      rounded-xl
+                      bg-purple-500/20
+                      text-purple-400
+                      font-medium
+                    "
+                  >
+                    🙋 This is you
+                  </span>
+                ) : alreadyAdded ? (
+                  <span
+                    className="
+                      px-4
+                      py-2
+                      rounded-xl
+                      bg-zinc-700
+                      text-zinc-300
+                      font-medium
+                    "
+                  >
+                    ✅ Already Added
+                  </span>
+                ) : (
+                  <button
+                    onClick={() =>
+                      addToTrip(
+                        user.id
+                      )
+                    }
+                    className="
+                      px-4
+                      py-2
+                      rounded-xl
+                      bg-green-600
+                      hover:bg-green-700
+                      text-white
+                      font-medium
+                    "
+                  >
+                    Add
+                  </button>
+                )}
               </div>
-            )
-          )}
+            );
+          })}
         </div>
       )}
     </div>

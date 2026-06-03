@@ -120,18 +120,38 @@ type RecentExpense = Expense & {
 };
 
 
-  const trips = await prisma.trip.findMany({
-    where: {
-      userId: user.id,
+ const trips = await prisma.trip.findMany({
+  where: {
+    OR: [
+      {
+        userId: user.id,
+      },
+      {
+        participants: {
+          some: {
+            userId: user.id,
+          },
+        },
+      },
+    ],
+  },
+
+  include: {
+    members: true,
+
+    participants: {
+      include: {
+        user: true,
+      },
     },
-    include: {
-      members: true,
-      expenses: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+
+    expenses: true,
+  },
+
+  orderBy: {
+    createdAt: "desc",
+  },
+});
 
 const expenses: Expense[] = trips.flatMap(
   (trip: Trip) => trip.expenses
@@ -175,7 +195,7 @@ const totalTrips = trips.length;
 
 const totalMembers = trips.reduce(
   (sum: number, trip: Trip) =>
-    sum + trip.members.length,
+    sum + trip.participants.length,
   0
 );
   
@@ -396,7 +416,7 @@ const totalMembers = trips.reduce(
                         👥{" "}
                         {
                           trip
-                            .members
+                            .participants
                             .length
                         }
                       </div>

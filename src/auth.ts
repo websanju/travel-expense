@@ -1,5 +1,8 @@
 import Credentials from "next-auth/providers/credentials";
-import type { NextAuthOptions, User } from "next-auth";
+import type {
+  NextAuthOptions,
+  User,
+} from "next-auth";
 import { getServerSession } from "next-auth/next";
 import { prisma } from "./lib/prisma";
 import bcrypt from "bcryptjs";
@@ -8,11 +11,13 @@ export const authOptions: NextAuthOptions = {
   providers: [
     Credentials({
       name: "Credentials",
+
       credentials: {
         email: {
           label: "Email",
           type: "text",
         },
+
         password: {
           label: "Password",
           type: "password",
@@ -62,6 +67,42 @@ export const authOptions: NextAuthOptions = {
 
   session: {
     strategy: "jwt",
+    maxAge:
+      30 * 24 * 60 * 60, // 30 days
+  },
+
+  jwt: {
+    maxAge:
+      30 * 24 * 60 * 60, // 30 days
+  },
+
+  callbacks: {
+    async jwt({
+      token,
+      user,
+    }) {
+      if (user) {
+        token.id = user.id;
+      }
+
+      return token;
+    },
+
+    async session({
+      session,
+      token,
+    }) {
+      if (session.user) {
+        (
+          session.user as {
+            id?: string;
+          }
+        ).id =
+          token.id as string;
+      }
+
+      return session;
+    },
   },
 
   secret:
@@ -76,7 +117,9 @@ export type SessionShape = {
   } | null;
 };
 
-export async function auth(): Promise<SessionShape | null> {
+export async function auth(): Promise<
+  SessionShape | null
+> {
   try {
     const session =
       await getServerSession(

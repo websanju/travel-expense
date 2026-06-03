@@ -142,7 +142,16 @@ export default async function TripPage({
       </div>
 
       {/* Actions */}
-      <AddParticipant tripId={id} />
+     <AddParticipant
+  tripId={trip.id}
+  currentUserId={user.id}
+  participants={trip.participants.map(
+    (participant: { userId: any; }) => ({
+      userId:
+        participant.userId,
+    })
+  )}
+/>
       <div className="grid lg:grid-cols-1 gap-6 mb-8">
         <div className="bg-zinc-900 border border-zinc-800 rounded-[28px] p-6">
           <AddMember tripId={trip.id} />
