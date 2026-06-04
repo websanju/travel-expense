@@ -22,7 +22,7 @@ export default async function HomePage() {
             ✈️ Smart Travel Expense Manager
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+          <h1 className="text-[42px] md:text-[42px] font-bold text-white leading-tight">
             Split Trip Expenses
             <br />
             Without Headaches

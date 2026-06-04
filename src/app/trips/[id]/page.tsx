@@ -113,7 +113,7 @@ export default async function TripPage({
     bg-gradient-to-br
     from-violet-600
     to-blue-600
-    rounded-3xl
+    rounded-2xl
     p-4
     text-white
     mb-5
