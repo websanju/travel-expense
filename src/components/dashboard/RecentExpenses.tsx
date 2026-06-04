@@ -12,30 +12,47 @@ export default function RecentExpenses({
 }: {
   expenses: RecentExpense[];
 }) {
+  if (expenses.length === 0) {
+    return null;
+  }
+
   return (
-    <div className="bg-zinc-900 rounded-3xl p-5">
-      <h2 className="text-xl font-bold mb-4">
-        Recent Expenses
-      </h2>
+    <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-bold">
+          Recent Expenses
+        </h2>
+
+        <span className="text-xs text-zinc-500">
+          {expenses.length}
+        </span>
+      </div>
 
       <div className="space-y-3">
         {expenses.map(
           (expense: RecentExpense) => (
             <div
               key={expense.id}
-              className="flex justify-between border-b border-zinc-800 pb-3"
+              className="
+                flex
+                items-center
+                justify-between
+                rounded-2xl
+                bg-zinc-800/50
+                p-4
+              "
             >
               <div>
-                <div>
+                <div className="font-medium">
                   {expense.title}
                 </div>
 
-                <div className="text-xs text-zinc-500">
+                <div className="text-xs text-zinc-500 mt-1">
                   {expense.tripTitle}
                 </div>
               </div>
 
-              <div className="font-semibold">
+              <div className="font-bold text-green-400">
                 ₹{expense.amount}
               </div>
             </div>

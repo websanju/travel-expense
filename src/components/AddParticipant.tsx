@@ -117,18 +117,18 @@ export default function AddParticipant({
   }
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 mb-6">
-      <div className="mb-5">
-        <h2 className="text-2xl font-bold">
+    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 mb-3">
+      <div className="mb-3">
+        <h2 className="text-[18px] font-bold">
           Add Registered User
         </h2>
 
-        <p className="text-zinc-500 text-sm mt-1">
+        <p className="text-zinc-500 text-sm mt-0">
           Search by phone number
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-3">
+      <div className="flex flex-col md:flex-row gap-2">
         <input
           type="tel"
           value={phone}

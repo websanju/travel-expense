@@ -26,9 +26,9 @@ export default function WhatsappInvite({
   }
 
   return (
-    <div className="mt-6">
+    <div>
       <h3 className="font-bold mb-3">
-        📱 Invite via WhatsApp
+        Invite via WhatsApp
       </h3>
 
       <input
@@ -57,7 +57,7 @@ export default function WhatsappInvite({
           w-full
         "
       >
-        📱 Share on WhatsApp
+         Share on WhatsApp
       </button>
     </div>
   );

@@ -270,7 +270,7 @@ export default async function TripsPage() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-10">
           <div>
-            <h1 className="text-5xl font-bold tracking-tight">My Trips</h1>
+            <h1 className="text-3xl font-bold">My Trips</h1>
 
             <p className="text-zinc-500 mt-2">
               Manage your journeys, expenses and settlements.
@@ -299,7 +299,7 @@ export default async function TripsPage() {
 
         {/* Empty State */}
         {trips.length === 0 ? (
-          <div className="bg-zinc-900 border border-zinc-800 rounded-[32px] p-12 text-center">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-[12px] p-12 text-center">
             <div className="text-6xl mb-4">✈️</div>
 
             <h2 className="text-2xl font-bold">No Trips Yet</h2>
@@ -337,11 +337,10 @@ export default async function TripsPage() {
                     border
                     border-zinc-200
                     dark:border-zinc-800
-                    rounded-[32px]
-                    p-6
-                    shadow-sm
-                    hover:shadow-2xl
-                    hover:-translate-y-1
+                    rounded-3xl
+                    border border-zinc-800
+                    bg-zinc-900
+                    p-3
                     transition-all
                     duration-300
                   "
@@ -376,7 +375,7 @@ export default async function TripsPage() {
                 </div>
 
                 <div className="mt-6 grid grid-cols-3 gap-3">
-                  <div className="bg-zinc-100 dark:bg-zinc-800 rounded-2xl p-4 text-center">
+                  <div className="bg-zinc-100 dark:bg-zinc-800 rounded-2xl p-2 text-center">
                     <div className="text-xs text-zinc-500">Trip</div>
 
                     <div className="font-bold mt-1">
@@ -384,7 +383,7 @@ export default async function TripsPage() {
                     </div>
                   </div>
 
-                  <div className="bg-zinc-100 dark:bg-zinc-800 rounded-2xl p-4 text-center">
+                  <div className="bg-zinc-100 dark:bg-zinc-800 rounded-2xl p-2 text-center">
                     <div className="text-xs text-zinc-500">Expenses</div>
 
                     <div className="font-bold mt-1">
@@ -392,7 +391,7 @@ export default async function TripsPage() {
                     </div>
                   </div>
 
-                  <div className="bg-zinc-100 dark:bg-zinc-800 rounded-2xl p-4 text-center">
+                  <div className="bg-zinc-100 dark:bg-zinc-800 rounded-2xl p-2 text-center">
                     <div className="text-xs text-zinc-500">Status</div>
 
                     <div className="font-bold mt-1">
