@@ -13,7 +13,8 @@ import { auth as getAuth } from "@/auth";
 //   ReactNode,
 //   ReactPortal,
 // } from "react";
-
+import { calculateSettlement }
+from "@/lib/calculateSettlement";
 // import AddParticipant from "@/components/AddParticipant";
 import DeleteParticipantButton from "@/components/DeleteParticipantButton";
 // import DeleteMemberButton from "@/components/DeleteMemberButton";
@@ -23,6 +24,8 @@ import TripTabs from "@/components/trip/TripTabs";
 // import AddMemberModal from "@/components/AddMemberModal";
 import AddMemberButton from "@/components/AddMemberButton";
 import AddExpenseButton from "@/components/AddExpenseButton";
+import SettlementSummary from "@/components/trip/SettlementSummary";
+import ShareSettlementPDF from "@/components/trip/ShareSettlementPDF";
 
 export default async function TripPage({
   params,
@@ -98,14 +101,22 @@ export default async function TripPage({
   if (!trip) {
     return <div className="p-10">Trip not found</div>;
   }
-
+  const result = calculateSettlement(trip) as any;
   const totalExpense = trip.expenses.reduce(
     (sum: number, expense: { amount: number }) => sum + expense.amount,
     0,
   );
 
+  const totalPeople =
+  trip.participants.length +
+  trip.members.length;
+
+
+
   const memberCount = trip.participants.length;
   const perPerson = memberCount > 0 ? totalExpense / memberCount : 0;
+
+  
 
   return (
     <div className="max-w-7xl mx-auto p-6 pt-[100px] pb-28">
@@ -346,6 +357,27 @@ export default async function TripPage({
         }
         settlement={
           <>
+           <SettlementSummary
+  tripId={trip.id}
+  tripTitle={trip.title}
+  totalExpense={
+    result.totalExpense
+  }
+  totalPeople={
+    result.totalPeople
+  }
+  perPerson={
+    result.perPerson
+  }
+  settlements={
+    result.settlements
+  }
+/>
+
+<ShareSettlementPDF
+  tripId={trip.id}
+/>
+         
             <Link
               href={`/trips/${trip.id}/settlement`}
               className="
