@@ -30,15 +30,15 @@ export default function DeleteParticipantButton({
     <button
       onClick={remove}
       className="
-        px-3
-        py-1
-        rounded-lg
-        bg-red-600
+        rounded-full
+        w-[20px]
+        h-[20px]
+        bg-red-600 
         text-white
-        text-sm
+        text-[10px]
       "
     >
-      Remove
+      X
     </button>
   );
 }
