@@ -20,6 +20,8 @@ import DeleteMemberButton from "@/components/DeleteMemberButton";
 import DeleteExpenseButton from "@/components/DeleteExpenseButton";
 import EditExpenseModal from "@/components/EditExpenseModal";
 import TripTabs from "@/components/trip/TripTabs";
+import AddMemberModal from "@/components/AddMemberModal";
+import AddMemberButton from "@/components/AddMemberButton";
 
 export default async function TripPage({
   params,
@@ -102,7 +104,6 @@ export default async function TripPage({
   );
 
   const memberCount = trip.participants.length;
-
   const perPerson = memberCount > 0 ? totalExpense / memberCount : 0;
 
   return (
@@ -157,7 +158,7 @@ export default async function TripPage({
         people={
           <>
             {/* Actions */}
-            <AddParticipant
+            {/* <AddParticipant
               tripId={trip.id}
               currentUserId={user.id}
               participants={trip.participants.map(
@@ -165,15 +166,14 @@ export default async function TripPage({
                   userId: participant.userId,
                 }),
               )}
-            />
-            <div className="grid lg:grid-cols-1 gap-6 mb-8">
+            /> */}
+            {/* <div className="grid lg:grid-cols-1 gap-6 mb-8">
               <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4">
-                {/* <AddMember tripId={trip.id} /> */}
-                 <WhatsappInvite tripId={trip.id} />
-                <InviteMember tripId={trip.id} />
-               
+                 <AddMember tripId={trip.id} /> 
+                <WhatsappInvite tripId={trip.id} />
+                <InviteMember tripId={trip.id} /> 
               </div>
-            </div>
+            </div> */}
             <div className="bg-zinc-900 border border-zinc-800 rounded-[32px] p-6 mb-8">
               <h2 className="text-xl font-bold mb-4">Trip Participants</h2>
 
@@ -229,9 +229,19 @@ export default async function TripPage({
                   ))}
                 </div>
               )}
+
+              <AddMemberButton
+                tripId={trip.id}
+                currentUserId={user.id}
+                participants={trip.participants.map(
+                  (participant: { userId: any }) => ({
+                    userId: participant.userId,
+                  }),
+                )}
+              />
             </div>
 
-            <div className="bg-zinc-900 border border-zinc-800 rounded-[32px] p-6 mb-8">
+            {/* <div className="bg-zinc-900 border border-zinc-800 rounded-[32px] p-6 mb-8">
               <h2 className="text-xl font-bold mb-2">Registered Users</h2>
               <div className="space-y-2">
                 {trip.participants.map(
@@ -306,9 +316,9 @@ export default async function TripPage({
                   ),
                 )}
               </div>
-            </div>
+            </div> */}
 
-            <div className="bg-zinc-900 border border-zinc-800 rounded-[32px] p-6 mb-8">
+            {/* <div className="bg-zinc-900 border border-zinc-800 rounded-[32px] p-6 mb-8">
               <h2 className="text-xl font-bold mb-4">Manual Members</h2>
 
               {trip.members.length === 0 ? (
@@ -374,7 +384,7 @@ export default async function TripPage({
                   )}
                 </div>
               )}
-            </div>
+            </div> */}
           </>
         }
         expenses={
