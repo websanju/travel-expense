@@ -77,7 +77,7 @@ export default async function ProfilePage() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto p-6 pt-[100px] pb-28">
+    <div className="max-w-7xl mx-auto p-3 pt-[100px] pb-28">
 
       {/* Profile Header */}
       <div className="bg-gradient-to-r from-violet-600 to-blue-600 rounded-[16px] p-3 text-white">

@@ -17,15 +17,7 @@ export default function AddExpenseButton({
       <button
         onClick={() => setOpen(true)}
         className="
-          w-full
-          py-3
-          rounded-xl
-          bg-gradient-to-r
-          from-green-600
-          to-emerald-500
-          text-white
-          font-semibold
-          mb-3
+         w-full mb-3 py-3 rounded-[8px] text-[14px] text-white font-semibold bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-[1.01] transition disabled:opacity-50 disabled:cursor-not-allowed
         "
       >
         + Add Expense
@@ -46,10 +38,10 @@ export default function AddExpenseButton({
         >
           <div
             className="
-              bg-zinc-900
+              bg-zinc-900 relative
               border
               border-zinc-800
-              rounded-2xl
+              rounded-[8px]
               w-full
               max-w-lg
               max-h-[90vh]
@@ -57,12 +49,11 @@ export default function AddExpenseButton({
               p-4
             "
           >
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="font-bold text-lg">Add Expense</h2>
+            <div className="flex justify-end items-center ">
 
               <button
                 onClick={() => setOpen(false)}
-                className="text-zinc-400 hover:text-white"
+                className="text-zinc-400 hover:text-white absolute top-2"
               >
                 ✕
               </button>

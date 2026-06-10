@@ -102,17 +102,18 @@ export default function ShareSettlementPDF({
       onClick={sharePDF}
       className="
         w-full
-        py-4
-        rounded-2xl
+        py-2
+        rounded-[8px]
         bg-green-600
         text-white
         font-semibold
         hover:bg-green-700
         transition
+        text-[14px]
         mb-3
       "
     >
-      📄 Share PDF
+       Share PDF
     </button>
   );
 }

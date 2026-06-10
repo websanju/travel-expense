@@ -9,7 +9,7 @@ export default function AddMemberButton(props: any) {
   return (
     <>
       <button
-        className=" w-full mt-5 py-4 rounded-2xl text-white font-semibold bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-[1.01] transition disabled:opacity-50 disabled:cursor-not-allowed "
+        className=" w-full mt-3 py-3 rounded-[8px] text-[14px] text-white font-semibold bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-[1.01] transition disabled:opacity-50 disabled:cursor-not-allowed "
         onClick={() => setOpen(true)}
       >
         + Add Member

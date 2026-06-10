@@ -143,7 +143,7 @@ export default function AddParticipant({
             bg-zinc-800
             border
             border-zinc-700
-            rounded-2xl
+            rounded-[8px]
             px-4
             py-3
             outline-none
@@ -156,8 +156,8 @@ export default function AddParticipant({
           disabled={loading}
           className="
             px-6
-            py-3
-            rounded-2xl
+            py-2
+            rounded-[8px]
             bg-purple-600
             text-white
             font-semibold
@@ -207,7 +207,7 @@ export default function AddParticipant({
                   justify-between
                   border
                   border-zinc-800
-                  rounded-2xl
+                 rounded-[8px]
                   p-4
                 "
               >

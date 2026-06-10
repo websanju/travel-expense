@@ -37,7 +37,7 @@ export default function RecentExpenses({
                 flex
                 items-center
                 justify-between
-                rounded-2xl
+                rounded-[16px]
                 bg-zinc-800/50
                 p-4
               "

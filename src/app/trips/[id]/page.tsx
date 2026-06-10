@@ -119,17 +119,17 @@ export default async function TripPage({
   
 
   return (
-    <div className="max-w-7xl mx-auto p-6 pt-[100px] pb-28">
+    <div className="max-w-7xl mx-auto p-3 pt-[100px] pb-28">
       {/* Hero */}
       <div
         className="
     bg-gradient-to-br
     from-violet-600
     to-blue-600
-    rounded-2xl
-    p-4
+    rounded-[16px]
+    p-3
     text-white
-    mb-5
+    mb-3
   "
       >
         <div className="flex items-center justify-between">
@@ -170,7 +170,7 @@ export default async function TripPage({
         people={
           <>
             <div className="bg-zinc-900 border border-zinc-800 rounded-[16px] p-3 mb-3">
-              <h2 className="text-[18px] font-bold mb-3">Trip Participants</h2>
+              <h2 className="text-[16px] font-bold mb-3">Trip Participants</h2>
 
               {trip.participants.length === 0 ? (
                 <div>No participants yet</div>
@@ -238,7 +238,7 @@ export default async function TripPage({
         expenses={
           <>
             <div className="bg-zinc-900 border border-zinc-800 rounded-[16px] p-3 mb-3">
-              <h2 className="text-[18px] font-bold mb-3">💰 Expenses</h2>
+              <h2 className="text-[16px] font-bold mb-3">💰 Expenses</h2>
 
               {trip.expenses.length === 0 ? (
                 <div className="text-zinc-500">No expenses yet</div>

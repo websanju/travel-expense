@@ -142,7 +142,7 @@ export default function EditExpenseModal({
                   bg-zinc-800
                   border
                   border-zinc-700
-                  rounded-2xl
+                  rounded-[8px]
                   px-4
                   py-3
                 "
@@ -162,7 +162,7 @@ export default function EditExpenseModal({
                   bg-zinc-800
                   border
                   border-zinc-700
-                  rounded-2xl
+                 rounded-[8px]
                   px-4
                   py-3
                 "
@@ -180,7 +180,7 @@ export default function EditExpenseModal({
                   bg-zinc-800
                   border
                   border-zinc-700
-                  rounded-2xl
+                 rounded-[8px]
                   px-4
                   py-3
                 "
@@ -209,7 +209,7 @@ export default function EditExpenseModal({
                   className="
                     flex-1
                     py-3
-                    rounded-2xl
+                    rounded-[8px]
                     bg-zinc-800
                   "
                 >
@@ -226,7 +226,7 @@ export default function EditExpenseModal({
                   className="
                     flex-1
                     py-3
-                    rounded-2xl
+                    rounded-[8px]
                     bg-green-600
                     text-white
                     font-semibold

@@ -21,14 +21,14 @@ export default function TripTabs({
   return (
     <div>
       {/* Tabs */}
-      <div className="sticky top-20 z-30 mb-6">
+      <div className="sticky top-20 z-30 mb-3">
         <div
           className="
             bg-zinc-900/95
             backdrop-blur-xl
             border
             border-zinc-800
-            rounded-2xl
+            rounded-[8px]
             p-1
             grid
             grid-cols-3
@@ -41,8 +41,8 @@ export default function TripTabs({
               )
             }
             className={`
-              py-3
-              rounded-xl
+              py-2
+              rounded-[8px]
               text-sm
               font-semibold
               transition
@@ -54,7 +54,7 @@ export default function TripTabs({
               }
             `}
           >
-            👥 People
+           People
           </button>
 
           <button
@@ -64,8 +64,8 @@ export default function TripTabs({
               )
             }
             className={`
-              py-3
-              rounded-xl
+              py-2
+              rounded-[8px]
               text-sm
               font-semibold
               transition
@@ -77,7 +77,7 @@ export default function TripTabs({
               }
             `}
           >
-            💰 Expenses
+            Expenses
           </button>
 
           <button
@@ -87,8 +87,8 @@ export default function TripTabs({
               )
             }
             className={`
-              py-3
-              rounded-xl
+              py-2
+              rounded-[8px]
               text-sm
               font-semibold
               transition
@@ -100,7 +100,7 @@ export default function TripTabs({
               }
             `}
           >
-            ⚖️ Settlement
+           Settlement
           </button>
         </div>
       </div>

@@ -66,14 +66,15 @@ export default function ShareSettlementButton({
       onClick={share}
       className="
         w-full
-        py-4
-        rounded-2xl
+        py-2
+        rounded-[8px]
         bg-green-600
         text-white
         font-semibold
+        text-[14px]
       "
     >
-      💬 Share on WhatsApp
+      Share on WhatsApp
     </button>
   );
 }

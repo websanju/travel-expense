@@ -78,7 +78,7 @@ export default function AddMember({
             bg-zinc-800
             border
             border-zinc-700
-            rounded-2xl
+           rounded-[8px]
             px-4
             py-4
             text-white
@@ -99,7 +99,7 @@ export default function AddMember({
           className="
             w-full
             py-4
-            rounded-2xl
+            rounded-[8px]
             bg-gradient-to-r
             from-violet-600
             to-blue-600

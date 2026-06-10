@@ -16,7 +16,7 @@ export default async function TripsPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,white,transparent_40%)] opacity-20" />
 
           <div className="relative z-10 text-center">
-            <div className="text-7xl mb-6">✈️</div>
+            <div className="text-7xl mb-3">✈️</div>
 
             <h1 className="text-5xl md:text-7xl font-bold text-white">
               Travel Expense
@@ -268,11 +268,11 @@ export default async function TripsPage() {
     <div className="pt-[10px]">
       <div className="max-w-7xl mx-auto p-6 pb-28 pt-[100px]">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-10">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-3">
           <div>
-            <h1 className="text-3xl font-bold">My Trips</h1>
+            <h1 className="lg:text-[26px] text-[22px] font-bold">My Trips</h1>
 
-            <p className="text-zinc-500 mt-2">
+            <p className="text-zinc-500 mt-0 text-[14px] lg:text-[16px]">
               Manage your journeys, expenses and settlements.
             </p>
           </div>
@@ -281,16 +281,18 @@ export default async function TripsPage() {
             href="/trips/new"
             className="
               mt-4 md:mt-0
-              px-6 py-3
-              rounded-2xl
+              px-4 py-2
+              rounded-[8px]
               bg-gradient-to-r
               from-violet-600
               to-blue-600
               text-white
               font-semibold
+              text-center
               shadow-lg
               hover:scale-105
               transition-all
+              text-[14px]
             "
           >
             + Create Trip
@@ -299,7 +301,7 @@ export default async function TripsPage() {
 
         {/* Empty State */}
         {trips.length === 0 ? (
-          <div className="bg-zinc-900 border border-zinc-800 rounded-[12px] p-12 text-center">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-[12px] p-3 text-center">
             <div className="text-6xl mb-4">✈️</div>
 
             <h2 className="text-2xl font-bold">No Trips Yet</h2>
@@ -326,7 +328,7 @@ export default async function TripsPage() {
             </Link>
           </div>
         ) : (
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
             {trips.map((trip: any) => (
               <div
                 key={trip.id}
@@ -337,7 +339,7 @@ export default async function TripsPage() {
                     border
                     border-zinc-200
                     dark:border-zinc-800
-                    rounded-3xl
+                    rounded-[16px]
                     border border-zinc-800
                     bg-zinc-900
                     p-3
@@ -347,14 +349,14 @@ export default async function TripsPage() {
               >
                 <div className="flex justify-between items-start">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-2xl">
+                    <div className="w-10 h-10 rounded-[6px] bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-2xl">
                       ✈️
                     </div>
 
                     <div>
-                      <h2 className="text-2xl font-bold">{trip.title}</h2>
+                      <h2 className="text-[16px] font-bold">{trip.title}</h2>
 
-                      <p className="text-zinc-500 mt-1">
+                      <p className="text-zinc-500 mt-0 text-[12px]">
                         {trip.destination || "No destination"}
                       </p>
                     </div>
@@ -365,8 +367,8 @@ export default async function TripsPage() {
     px-3 py-1 rounded-full text-sm font-medium
     ${
       trip.expenses.length > 0
-        ? "bg-green-100 text-green-700"
-        : "bg-yellow-100 text-yellow-700"
+        ? "bg-green-100 text-[10px] text-green-700"
+        : "bg-yellow-100 text-[10px] text-yellow-700"
     }
   `}
                   >
@@ -374,24 +376,24 @@ export default async function TripsPage() {
                   </div>
                 </div>
 
-                <div className="mt-6 grid grid-cols-3 gap-3">
-                  <div className="bg-zinc-100 dark:bg-zinc-800 rounded-2xl p-2 text-center">
+                <div className="mt-3 grid grid-cols-3 gap-3">
+                  <div className="bg-zinc-100 dark:bg-zinc-800 rounded-[8px] p-1 lg:p-2 text-center">
                     <div className="text-xs text-zinc-500">Trip</div>
 
                     <div className="font-bold mt-1">
-                      👥 {trip.participants.length}
+                      {trip.participants.length}
                     </div>
                   </div>
 
-                  <div className="bg-zinc-100 dark:bg-zinc-800 rounded-2xl p-2 text-center">
+                  <div className="bg-zinc-100 dark:bg-zinc-800 rounded-[8px] p-2 text-center">
                     <div className="text-xs text-zinc-500">Expenses</div>
 
                     <div className="font-bold mt-1">
-                      💳 {trip.expenses.length}
+                     {trip.expenses.length}
                     </div>
                   </div>
 
-                  <div className="bg-zinc-100 dark:bg-zinc-800 rounded-2xl p-2 text-center">
+                  <div className="bg-zinc-100 dark:bg-zinc-800 rounded-[8px] p-2 text-center">
                     <div className="text-xs text-zinc-500">Status</div>
 
                     <div className="font-bold mt-1">
@@ -405,19 +407,20 @@ export default async function TripsPage() {
                   </div>
                 </div>
 
-                <div className="mt-6 flex gap-3">
+                <div className="mt-3 flex gap-3">
                   <Link
                     href={`/trips/${trip.id}`}
                     className="
                         flex-1
                         text-center
-                        py-3
-                        rounded-2xl
+                        py-2
+                        rounded-[8px]
                         bg-gradient-to-r
                         from-blue-600
                         to-blue-500
                         text-white
                         font-semibold
+                        text-[14px]
                       "
                   >
                     Open Trip
@@ -428,12 +431,13 @@ export default async function TripsPage() {
                     className="
                         flex-1
                         text-center
-                        py-3
-                        rounded-2xl
+                        py-2
+                        rounded-[8px]
                         border
                         border-zinc-300
                         dark:border-zinc-700
                         font-semibold
+                         text-[14px]
                       "
                   >
                     Members

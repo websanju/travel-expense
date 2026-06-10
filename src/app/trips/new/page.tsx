@@ -119,9 +119,9 @@ export default function NewTrip() {
                 bg-zinc-800
                 border
                 border-zinc-700
-                rounded-2xl
-                px-4
-                py-4
+                rounded-[8px]
+                px-3
+                py-3
                 text-white
                 placeholder-zinc-500
                 focus:outline-none
@@ -149,7 +149,7 @@ export default function NewTrip() {
                 bg-zinc-800
                 border
                 border-zinc-700
-                rounded-2xl
+                rounded-[8px]
                 px-4
                 py-4
                 text-white
@@ -174,7 +174,7 @@ export default function NewTrip() {
             className="
               w-full
               py-4
-              rounded-2xl
+              rounded-[8px]
               text-white
               font-semibold
               bg-gradient-to-r

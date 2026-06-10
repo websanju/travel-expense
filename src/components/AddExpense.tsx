@@ -77,12 +77,12 @@ export default function AddExpense({
   return (
     <div>
       {/* Header */}
-      <div className="flex items-center gap-3 mb-5">
+      <div className="flex items-center gap-3 mb-3">
         <div
           className="
-            w-12
-            h-12
-            rounded-2xl
+            w-8
+            h-8
+           rounded-[8px]
             bg-gradient-to-br
             from-green-500
             to-emerald-600
@@ -96,11 +96,11 @@ export default function AddExpense({
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-[14px] font-bold">
             Add Expense
           </h2>
 
-          <p className="text-zinc-500 text-sm">
+          <p className="text-zinc-500 text-[12px]">
             Record a new expense for
             this trip
           </p>
@@ -115,9 +115,9 @@ export default function AddExpense({
             bg-zinc-800
             border
             border-zinc-700
-            rounded-2xl
-            px-4
-            py-4
+            rounded-[8px]
+            px-2
+            py-2
             text-white
             placeholder-zinc-500
             focus:outline-none
@@ -140,9 +140,9 @@ export default function AddExpense({
             bg-zinc-800
             border
             border-zinc-700
-            rounded-2xl
-            px-4
-            py-4
+            rounded-[8px]
+           px-2
+            py-2
             text-white
             placeholder-zinc-500
             focus:outline-none
@@ -164,9 +164,9 @@ export default function AddExpense({
             bg-zinc-800
             border
             border-zinc-700
-            rounded-2xl
-            px-4
-            py-4
+            rounded-[8px]
+           px-2
+            py-2
             text-white
             focus:outline-none
             focus:border-green-500
@@ -200,8 +200,8 @@ export default function AddExpense({
           disabled={loading}
           className="
             w-full
-            py-4
-            rounded-2xl
+            py-2
+            rounded-[8px]
             text-white
             font-semibold
             bg-gradient-to-r
@@ -211,6 +211,7 @@ export default function AddExpense({
             transition
             disabled:opacity-50
             disabled:cursor-not-allowed
+            text-[14px]
           "
         >
           {loading

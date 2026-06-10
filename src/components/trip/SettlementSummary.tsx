@@ -26,11 +26,11 @@ export default function SettlementSummary({
 {
     
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
 
       {/* Summary */}
-      <div className="bg-zinc-900 rounded-3xl p-5 border border-zinc-800">
-        <h2 className="text-lg font-bold mb-4">
+      <div className="bg-zinc-900 rounded-[16px] p-3 border border-zinc-800">
+        <h2 className="text-[16px] font-bold mb-3">
           Settlement Summary
         </h2>
 
@@ -74,8 +74,8 @@ export default function SettlementSummary({
       </div>
 
       {/* Settlements */}
-      <div className="bg-zinc-900 rounded-3xl p-5 border border-zinc-800">
-        <h2 className="text-lg font-bold mb-4">
+      <div className="bg-zinc-900 rounded-[16px] p-3 border border-zinc-800">
+        <h2 className="text-[16px] font-bold mb-3">
           Who Pays Whom
         </h2>
 
@@ -91,17 +91,17 @@ export default function SettlementSummary({
                   key={index}
                   className="
                     bg-zinc-800
-                    rounded-2xl
-                    p-4
+                    rounded-[8px]
+                    p-3
                   "
                 >
-                  <span className="font-semibold">
+                  <span className="text-[14px]">
                     {settlement.from}
                   </span>
 
                   {" pays "}
 
-                  <span className="font-semibold">
+                  <span className="text-[14px] text-zinc-500 mr-2">
                     {settlement.to}
                   </span>
 
