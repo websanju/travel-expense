@@ -18,7 +18,7 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,white,transparent_40%)] opacity-20" />
 
         <div className="relative z-10 max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm text-white mb-6">
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-2 text-[12px] text-white mb-3">
             ✈️ Smart Travel Expense Manager
           </div>
 
@@ -115,56 +115,15 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="grid md:grid-cols-4 gap-3 mt-3">
-        <div className="bg-gradient-to-br from-purple-600 to-violet-700 rounded-[16px] p-3">
-          <div className="text-white/70">
-            Trips
-          </div>
-
-          <div className="text-[30px] font-bold text-white mt-2">
-            ∞
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-[16px] p-3">
-          <div className="text-white/70">
-            Members
-          </div>
-
-          <div className="text-4xl font-bold text-white mt-2">
-            ∞
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-green-600 to-emerald-600 rounded-[16px] p-3">
-          <div className="text-white/70">
-            Expenses
-          </div>
-
-          <div className="text-4xl font-bold text-white mt-2">
-            ₹
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-orange-600 to-red-600 rounded-[16px] p-3">
-          <div className="text-white/70">
-            Settlement
-          </div>
-
-          <div className="text-4xl font-bold text-white mt-2">
-            ⚡
-          </div>
-        </div>
-      </div>
+    
 
       {/* CTA */}
-      <div className="mt-3 bg-zinc-900 border border-zinc-800 rounded-[16px] p-3 text-center">
+      <div className="mt-3 bg-zinc-900 border border-zinc-800 rounded-[16px] pt-4 pb-4 p-3 text-center">
         <h2 className="text-[22px] font-bold">
           Ready for your next trip?
         </h2>
 
-        <p className="text-zinc-400 text-[12px] mt-3">
+        <p className="text-zinc-400 text-[12px] mt-1">
           Create a trip and start tracking
           expenses today.
         </p>
@@ -180,7 +139,7 @@ export default async function HomePage() {
           ) : (
             <Link
               href="/register"
-              className="bg-purple-600 px-3 py-1 rounded-[8px] inline-block"
+              className="bg-purple-600 px-3 py-1 text-[14px] rounded-[8px] inline-block"
             >
               Get Started Free
             </Link>

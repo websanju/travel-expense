@@ -86,7 +86,7 @@ if (tripId) {
   }
 
   return (
-    <div className="flex items-center justify-center px-6 pt-[200px] pb-10">
+    <div className="flex items-center justify-center px-6 pt-[100px] pb-10">
       <div
         className="
           w-full
@@ -95,36 +95,18 @@ if (tripId) {
           border
           border-zinc-800
           rounded-[32px]
-          p-8
+          p-3
           shadow-2xl
         "
       >
         {/* Header */}
-        <div className="text-center mb-8">
-          <div
-            className="
-              w-20
-              h-20
-              mx-auto
-              rounded-3xl
-              bg-gradient-to-br
-              from-purple-600
-              to-blue-600
-              flex
-              items-center
-              justify-center
-              text-4xl
-              mb-5
-            "
-          >
-            ✈️
-          </div>
-
-          <h1 className="text-4xl font-bold">
+        <div className="text-center mb-4">
+          
+          <h1 className="text-[26px] font-bold">
             Create Account
           </h1>
 
-          <p className="text-zinc-400 mt-2">
+          <p className="text-zinc-400 mt-1 text-[16px]">
             Start managing your travel
             expenses today
           </p>
@@ -151,8 +133,8 @@ if (tripId) {
                 bg-zinc-800
                 border
                 border-zinc-700
-                rounded-2xl
-                px-4
+                rounded-[8px]
+                px-3
                 py-3
                 outline-none
                 focus:border-purple-500
@@ -204,9 +186,9 @@ if (tripId) {
       bg-zinc-800
       border
       border-zinc-700
-      rounded-2xl
-      px-4
-      py-3
+       rounded-[8px]
+                px-3
+                py-3
       outline-none
       focus:border-purple-500
     "
