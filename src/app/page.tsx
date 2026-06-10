@@ -23,9 +23,7 @@ export default async function HomePage() {
           </div>
 
           <h1 className="text-[22px] md:text-[22px] font-bold text-white leading-tight">
-            Split Trip Expenses
-            <br />
-            Without Headaches
+            Split Trip Expenses Without Headaches
           </h1>
 
           <p className="text-white/80 text-[14px] mt-3">
