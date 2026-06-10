@@ -26,11 +26,11 @@ export default function WhatsappInvite({
   }
 
   return (
-    <div>
-      <h3 className="font-bold mb-3">
+    <div className="bg-zinc-900 border border-zinc-800 rounded-[16px] p-3 mb-3">
+      <h3 className="text-[14px] mb-3">
         Invite via WhatsApp
       </h3>
-
+<div className="flex flex-col md:flex-row gap-2">
       <input
         type="tel"
         placeholder="+91 9876543210"
@@ -41,7 +41,7 @@ export default function WhatsappInvite({
           )
         }
         className="
-           w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-4 text-white placeholder-zinc-500 focus:outline-none focus:border-green-500 mb-4
+            flex-1 bg-zinc-800 border border-zinc-700 rounded-[8px] px-4 py-2 outline-none focus:border-purple-500 
         "
       />
 
@@ -51,14 +51,15 @@ export default function WhatsappInvite({
           bg-green-600
           hover:bg-green-700
           text-white
-          px-4
-          py-3
-          rounded-xl
+          px-6
+          py-2
+          text-white font-semibold disabled:opacity-50 text-[14px] rounded-[8px]
           w-full
         "
       >
          Share on WhatsApp
       </button>
+      </div>
     </div>
   );
 }

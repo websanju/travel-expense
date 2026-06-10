@@ -36,17 +36,17 @@ export default function AddMemberModal({
           bg-zinc-900
           border
           border-zinc-800
-          rounded-3xl
-          p-6
+          rounded-[16px]
+          p-3
           w-full
           max-w-lg
-          mx-4
+          mx-3
           max-h-[90vh]
           overflow-y-auto
         "
       >
-        <div className="flex justify-between mb-6">
-          <h2 className="text-xl font-bold">
+        <div className="flex justify-between mb-3 border-b border-[#000]/60 pb-2">
+          <h2 className="text-[16px] font-bold">
             Add Member
           </h2>
 
@@ -60,7 +60,7 @@ export default function AddMemberModal({
 
         <div className="space-y-6">
           <div>
-            <h3 className="font-semibold mb-3">
+            <h3 className="text-[14px] mb-3">
               Existing User
             </h3>
 
@@ -72,8 +72,8 @@ export default function AddMemberModal({
           </div>
 
           <div>
-            <h3 className="font-semibold mb-3">
-              WhatsApp Invite
+           <h3 className="text-[14px] mb-3">
+              WhatsApp 
             </h3>
 
             <WhatsappInvite
@@ -82,8 +82,8 @@ export default function AddMemberModal({
           </div>
 
           <div>
-            <h3 className="font-semibold mb-3">
-              Email Invite
+           <h3 className="text-[14px] mb-3">
+              Email 
             </h3>
 
             <InviteMember

@@ -38,26 +38,27 @@ export default function InviteMember({
   }
 
   return (
-    <div className=" rounded p-5 mt-6 bg-zinc-800 rounded-2xl p-5">
-      <h2 className="font-bold mb-3">
+    <div className="bg-zinc-900 border border-zinc-800 rounded-[16px] p-3 mb-3">
+       <h3 className="text-[14px] mb-3">
         Invite Member
-      </h2>
-
+      </h3>
+<div className="flex flex-col md:flex-row gap-2">
       <input
         value={email}
         onChange={(e) =>
           setEmail(e.target.value)
         }
         placeholder="anil@gmail.com"
-        className=" w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-4 text-white placeholder-zinc-500 focus:outline-none focus:border-green-500 mb-4"
+        className=" flex-1 bg-zinc-800 border border-zinc-700 rounded-[8px] px-4 py-2 outline-none focus:border-purple-500  "
       />
 
       <button
         onClick={invite}
-        className=" w-full py-4 rounded-2xl text-white font-semibold bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-[1.01] transition disabled:opacity-50 disabled:cursor-not-allowed "
+        className=" bg-green-600 hover:bg-green-700 text-white px-6 py-2 text-white font-semibold disabled:opacity-50 text-[14px] rounded-[8px] w-full  "
       >
         Invite
       </button>
+      </div>
     </div>
   );
 }

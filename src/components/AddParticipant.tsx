@@ -117,9 +117,9 @@ export default function AddParticipant({
   }
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 mb-3">
+    <div className="bg-zinc-900 border border-zinc-800 rounded-[16px] p-3 mb-3">
       <div className="mb-3">
-        <h2 className="text-[18px] font-bold">
+        <h2 className="text-[16px]">
           Add Registered User
         </h2>
 
@@ -145,7 +145,7 @@ export default function AddParticipant({
             border-zinc-700
             rounded-[8px]
             px-4
-            py-3
+            py-2
             outline-none
             focus:border-purple-500
           "
@@ -162,6 +162,7 @@ export default function AddParticipant({
             text-white
             font-semibold
             disabled:opacity-50
+            text-[14px]
           "
         >
           {loading
