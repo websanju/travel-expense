@@ -12,9 +12,9 @@ export default async function HomePage() {
     session?.user?.name || "User";
 
   return (
-    <div className="max-w-7xl mx-auto px-6 pt-[120px] pb-20">
+    <div className="max-w-7xl mx-auto px-3 pt-[100px] pb-20">
       {/* Hero */}
-      <div className="relative overflow-hidden rounded-[40px] bg-gradient-to-br from-purple-600 via-violet-600 to-blue-600 p-10 md:p-16">
+      <div className="relative overflow-hidden rounded-[16px] bg-gradient-to-br from-purple-600 via-violet-600 to-blue-600 p-4 md:p-4">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,white,transparent_40%)] opacity-20" />
 
         <div className="relative z-10 max-w-3xl">
@@ -22,31 +22,31 @@ export default async function HomePage() {
             ✈️ Smart Travel Expense Manager
           </div>
 
-          <h1 className="text-[42px] md:text-[42px] font-bold text-white leading-tight">
+          <h1 className="text-[22px] md:text-[22px] font-bold text-white leading-tight">
             Split Trip Expenses
             <br />
             Without Headaches
           </h1>
 
-          <p className="text-white/80 text-lg mt-6">
+          <p className="text-white/80 text-[14px] mt-3">
             Track trip expenses, add friends,
             calculate settlements and manage
             travel budgets in one place.
           </p>
 
-          <div className="flex flex-wrap gap-4 mt-8">
+          <div className="flex flex-wrap gap-4 mt-3">
             {!isLoggedIn ? (
               <>
                 <Link
                   href="/login"
-                  className="bg-white text-black px-6 py-3 rounded-2xl font-semibold"
+                  className="bg-white text-black px-3 py-1 rounded-[8px] font-semibold text-[14px]"
                 >
                   Login
                 </Link>
 
                 <Link
                   href="/register"
-                  className="border border-white text-white px-6 py-3 rounded-2xl font-semibold"
+                  className="border border-white text-white px-3 py-1 rounded-[8px] text-[14px] font-semibold"
                 >
                   Create Account
                 </Link>
@@ -70,47 +70,47 @@ export default async function HomePage() {
       </div>
 
       {/* Features */}
-      <div className="grid md:grid-cols-3 gap-6 mt-12">
-        <div className="bg-zinc-900 border border-zinc-800 rounded-[28px] p-6">
-          <div className="text-4xl mb-4">
+      <div className="grid md:grid-cols-3 gap-3 mt-3">
+        <div className="bg-zinc-900 border border-zinc-800 rounded-[16px] p-3">
+          <div className="text-4xl mb-1">
             👥
           </div>
 
-          <h3 className="text-xl font-bold mb-2">
+          <h3 className="text-[16px] font-bold mb-1">
             Manage Friends
           </h3>
 
-          <p className="text-zinc-400">
+          <p className="text-zinc-400 text-[13px]">
             Add trip members and keep track
             of who joined your journey.
           </p>
         </div>
 
-        <div className="bg-zinc-900 border border-zinc-800 rounded-[28px] p-6">
-          <div className="text-4xl mb-4">
+        <div className="bg-zinc-900 border border-zinc-800 rounded-[16px] p-3">
+          <div className="text-4xl mb-1">
             💰
           </div>
 
-          <h3 className="text-xl font-bold mb-2">
+          <h3 className="text-[16px] font-bold mb-1">
             Track Expenses
           </h3>
 
-          <p className="text-zinc-400">
+          <p className="text-zinc-400 text-[13px]">
             Record hotels, food, transport,
             shopping and every travel cost.
           </p>
         </div>
 
-        <div className="bg-zinc-900 border border-zinc-800 rounded-[28px] p-6">
-          <div className="text-4xl mb-4">
+        <div className="bg-zinc-900 border border-zinc-800 rounded-[16px] p-3">
+          <div className="text-4xl mb-1">
             ⚖️
           </div>
 
-          <h3 className="text-xl font-bold mb-2">
+          <h3 className="text-[16px] font-bold mb-1">
             Auto Settlement
           </h3>
 
-          <p className="text-zinc-400">
+          <p className="text-zinc-400 text-[13px]">
             Instantly calculate who owes whom
             after the trip ends.
           </p>
@@ -118,18 +118,18 @@ export default async function HomePage() {
       </div>
 
       {/* Stats */}
-      <div className="grid md:grid-cols-4 gap-4 mt-12">
-        <div className="bg-gradient-to-br from-purple-600 to-violet-700 rounded-3xl p-6">
+      <div className="grid md:grid-cols-4 gap-3 mt-3">
+        <div className="bg-gradient-to-br from-purple-600 to-violet-700 rounded-[16px] p-3">
           <div className="text-white/70">
             Trips
           </div>
 
-          <div className="text-4xl font-bold text-white mt-2">
+          <div className="text-[30px] font-bold text-white mt-2">
             ∞
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-3xl p-6">
+        <div className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-[16px] p-3">
           <div className="text-white/70">
             Members
           </div>
@@ -139,7 +139,7 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-green-600 to-emerald-600 rounded-3xl p-6">
+        <div className="bg-gradient-to-br from-green-600 to-emerald-600 rounded-[16px] p-3">
           <div className="text-white/70">
             Expenses
           </div>
@@ -149,7 +149,7 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-600 to-red-600 rounded-3xl p-6">
+        <div className="bg-gradient-to-br from-orange-600 to-red-600 rounded-[16px] p-3">
           <div className="text-white/70">
             Settlement
           </div>
@@ -161,17 +161,17 @@ export default async function HomePage() {
       </div>
 
       {/* CTA */}
-      <div className="mt-14 bg-zinc-900 border border-zinc-800 rounded-[40px] p-10 text-center">
-        <h2 className="text-4xl font-bold">
+      <div className="mt-3 bg-zinc-900 border border-zinc-800 rounded-[16px] p-3 text-center">
+        <h2 className="text-[22px] font-bold">
           Ready for your next trip?
         </h2>
 
-        <p className="text-zinc-400 mt-3">
+        <p className="text-zinc-400 text-[12px] mt-3">
           Create a trip and start tracking
           expenses today.
         </p>
 
-        <div className="mt-6">
+        <div className="mt-3">
           {isLoggedIn ? (
             <Link
               href="/trips/new"
@@ -182,7 +182,7 @@ export default async function HomePage() {
           ) : (
             <Link
               href="/register"
-              className="bg-purple-600 px-6 py-3 rounded-2xl inline-block"
+              className="bg-purple-600 px-3 py-1 rounded-[8px] inline-block"
             >
               Get Started Free
             </Link>

@@ -109,6 +109,7 @@ export default function ShareSettlementPDF({
         font-semibold
         hover:bg-green-700
         transition
+        mb-3
       "
     >
       📄 Share PDF

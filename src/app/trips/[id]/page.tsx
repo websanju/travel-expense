@@ -378,7 +378,7 @@ export default async function TripPage({
   tripId={trip.id}
 />
          
-            <Link
+            {/* <Link
               href={`/trips/${trip.id}/settlement`}
               className="
           px-6
@@ -394,7 +394,7 @@ export default async function TripPage({
         "
             >
               View Settlement
-            </Link>
+            </Link> */}
           </>
         }
       />
