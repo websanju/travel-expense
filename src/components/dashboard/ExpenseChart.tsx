@@ -21,7 +21,7 @@ export default function ExpenseChart({
   data: ChartItem[];
 }) {
   return (
-    <div className="w-full h-[350px]">
+    <div className="w-full h-[250px]">
       <ResponsiveContainer
         width="100%"
         height="100%"

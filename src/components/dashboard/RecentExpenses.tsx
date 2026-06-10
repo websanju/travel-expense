@@ -17,9 +17,9 @@ export default function RecentExpenses({
   }
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-5">
+    <div className="bg-zinc-900 border border-zinc-800 rounded-[16px] p-3">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold">
+        <h2 className="text-[16px] font-bold">
           Recent Expenses
         </h2>
 

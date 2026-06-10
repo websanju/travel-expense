@@ -1,6 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
@@ -21,11 +25,48 @@ export default function UserDropdown({
   const [open, setOpen] =
     useState(false);
 
+  const dropdownRef =
+    useRef<HTMLDivElement>(null);
+
   const displayName =
     name || "Guest";
 
+  const closeMenu = () => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    function handleClickOutside(
+      event: MouseEvent
+    ) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(
+          event.target as Node
+        )
+      ) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener(
+      "mousedown",
+      handleClickOutside
+    );
+
+    return () => {
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
+    };
+  }, []);
+
   return (
-    <div className="relative">
+    <div
+      ref={dropdownRef}
+      className="relative"
+    >
       {/* Avatar */}
       <button
         onClick={() =>
@@ -154,6 +195,7 @@ export default function UserDropdown({
               <>
                 <Link
                   href="/profile"
+                  onClick={closeMenu}
                   className="
                     block
                     px-4
@@ -168,6 +210,7 @@ export default function UserDropdown({
 
                 <Link
                   href="/dashboard"
+                  onClick={closeMenu}
                   className="
                     block
                     px-4
@@ -182,6 +225,7 @@ export default function UserDropdown({
 
                 <Link
                   href="/trips"
+                  onClick={closeMenu}
                   className="
                     block
                     px-4
@@ -195,11 +239,14 @@ export default function UserDropdown({
                 </Link>
 
                 <button
-                  onClick={() =>
+                  onClick={() => {
+                    setOpen(false);
+
                     signOut({
-                      callbackUrl: "/",
-                    })
-                  }
+                      callbackUrl:
+                        "/",
+                    });
+                  }}
                   className="
                     w-full
                     text-left
@@ -218,6 +265,7 @@ export default function UserDropdown({
               <>
                 <Link
                   href="/login"
+                  onClick={closeMenu}
                   className="
                     block
                     px-4
@@ -232,6 +280,7 @@ export default function UserDropdown({
 
                 <Link
                   href="/register"
+                  onClick={closeMenu}
                   className="
                     block
                     px-4
