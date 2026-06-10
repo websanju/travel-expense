@@ -3,7 +3,7 @@ import {
   PDFDocument,
   StandardFonts,
 } from "pdf-lib";
-
+console.log("PDF ROUTE HIT");
 export async function GET(
   req: Request,
   {
@@ -344,20 +344,20 @@ export async function GET(
   );
 
   const pdfBytes =
-    await pdfDoc.save();
+  await pdfDoc.save();
 
-  return new Response(
-    Buffer.from(
-      pdfBytes
-    ),
-    {
-      headers: {
-        "Content-Type":
-          "application/pdf",
-
-        "Content-Disposition":
-          `attachment; filename="${trip.title}-report.pdf"`,
-      },
-    }
-  );
+return new Response(
+  Buffer.from(pdfBytes),
+  {
+    status: 200,
+    headers: {
+      "Content-Type":
+        "application/pdf",
+      "Content-Disposition":
+        `inline; filename="${trip.title}.pdf"`,
+      "Content-Length":
+        pdfBytes.length.toString(),
+    },
+  }
+);
 }
