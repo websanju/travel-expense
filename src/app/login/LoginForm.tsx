@@ -67,7 +67,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="flex items-center justify-center px-6 pt-[200px] pb-10">
+    <div className="flex items-center justify-center px-3 pt-[100px] pb-3">
       <div
         className="
           w-full
@@ -75,36 +75,18 @@ export default function LoginForm() {
           bg-zinc-900
           border
           border-zinc-800
-          rounded-[32px]
-          p-8
+          rounded-[16px]
+          p-3
           shadow-2xl
         "
       >
         <div className="text-center mb-8">
-          <div
-            className="
-              w-20
-              h-20
-              mx-auto
-              rounded-3xl
-              bg-gradient-to-br
-              from-purple-600
-              to-blue-600
-              flex
-              items-center
-              justify-center
-              text-4xl
-              mb-5
-            "
-          >
-            ✈️
-          </div>
 
-          <h1 className="text-4xl font-bold">
+          <h1 className="text-[26px] font-bold">
             Welcome Back
           </h1>
 
-          <p className="text-zinc-400 mt-2">
+          <p className="text-zinc-400 mt-1 text-[16px]">
             Sign in to manage your
             travel expenses
           </p>
@@ -126,13 +108,12 @@ export default function LoginForm() {
               }
               placeholder="john@example.com"
               className="
-                w-full
-                bg-zinc-800
+                 w-full
                 border
                 border-zinc-700
-                rounded-2xl
-                px-4
-                py-3
+                rounded-[6px]
+                px-3
+                py-2
                 outline-none
                 focus:border-purple-500
               "
@@ -155,12 +136,11 @@ export default function LoginForm() {
               placeholder="••••••••"
               className="
                 w-full
-                bg-zinc-800
                 border
                 border-zinc-700
-                rounded-2xl
-                px-4
-                py-3
+                rounded-[6px]
+                px-3
+                py-2
                 outline-none
                 focus:border-purple-500
               "
@@ -188,8 +168,8 @@ export default function LoginForm() {
             disabled={loading}
             className="
               w-full
-              py-3
-              rounded-2xl
+              py-2
+              rounded-[8px]
               bg-gradient-to-r
               from-purple-600
               to-blue-600
@@ -198,7 +178,6 @@ export default function LoginForm() {
               shadow-lg
               hover:scale-[1.02]
               transition
-              disabled:opacity-50
             "
           >
             {loading

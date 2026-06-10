@@ -86,7 +86,7 @@ if (tripId) {
   }
 
   return (
-    <div className="flex items-center justify-center px-6 pt-[100px] pb-10">
+    <div className="flex items-center justify-center px-3 pt-[100px] pb-3">
       <div
         className="
           w-full
@@ -94,7 +94,7 @@ if (tripId) {
           bg-zinc-900
           border
           border-zinc-800
-          rounded-[32px]
+          rounded-[16px]
           p-3
           shadow-2xl
         "
@@ -130,12 +130,11 @@ if (tripId) {
               placeholder="John Doe"
               className="
                 w-full
-                bg-zinc-800
                 border
                 border-zinc-700
-                rounded-[8px]
+                rounded-[6px]
                 px-3
-                py-3
+                py-2
                 outline-none
                 focus:border-purple-500
               "
@@ -156,12 +155,11 @@ if (tripId) {
               placeholder="john@example.com"
               className="
                 w-full
-                bg-zinc-800
-                border
+               border
                 border-zinc-700
-                rounded-2xl
-                px-4
-                py-3
+                rounded-[6px]
+                px-3
+               py-2
                 outline-none
                 focus:border-purple-500
               "
@@ -183,12 +181,11 @@ if (tripId) {
     required
     className="
       w-full
-      bg-zinc-800
       border
-      border-zinc-700
-       rounded-[8px]
+                border-zinc-700
+                rounded-[6px]
                 px-3
-                py-3
+               py-2
       outline-none
       focus:border-purple-500
     "
@@ -211,12 +208,11 @@ if (tripId) {
               placeholder="••••••••"
               className="
                 w-full
-                bg-zinc-800
                 border
                 border-zinc-700
-                rounded-2xl
-                px-4
-                py-3
+                rounded-[6px]
+                px-3
+               py-2
                 outline-none
                 focus:border-purple-500
               "
@@ -228,8 +224,8 @@ if (tripId) {
             disabled={loading}
             className="
               w-full
-              py-3
-              rounded-2xl
+              py-2
+              rounded-[8px]
               bg-gradient-to-r
               from-purple-600
               to-blue-600
