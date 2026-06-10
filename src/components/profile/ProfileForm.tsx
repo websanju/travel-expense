@@ -59,38 +59,14 @@ export default function ProfileForm({
   }
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-[32px] p-8 mt-8">
-      <div className="flex justify-between items-center mb-8">
-        <h2 className="text-2xl font-bold">Profile Information</h2>
+    <div className="bg-zinc-900 border border-zinc-800 rounded-[16px] p-3 mt-3">
+      <div className="flex justify-between items-center mb-3">
+        <h2 className="text-[16px] font-bold">Profile Information</h2>
 
-        {!editing ? (
-          <button
-            onClick={() => setEditing(true)}
-            className="bg-blue-600 hover:bg-blue-700 transition px-5 py-2 rounded-xl text-white"
-          >
-            Edit Profile
-          </button>
-        ) : (
-          <div className="flex gap-2">
-            <button
-              onClick={() => setEditing(false)}
-              className="bg-zinc-700 px-4 py-2 rounded-xl"
-            >
-              Cancel
-            </button>
-
-            <button
-              onClick={saveProfile}
-              disabled={loading}
-              className="bg-green-600 px-4 py-2 rounded-xl text-white"
-            >
-              {loading ? "Saving..." : "Save"}
-            </button>
-          </div>
-        )}
+        
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {/* Name */}
         <div>
           <label className="text-zinc-500 text-sm block mb-2">Full Name</label>
@@ -104,7 +80,7 @@ export default function ProfileForm({
                 bg-zinc-800
                 border
                 border-zinc-700
-                rounded-xl
+                rounded-[8px]
                 p-3
               "
             />
@@ -137,7 +113,7 @@ export default function ProfileForm({
                 bg-zinc-800
                 border
                 border-zinc-700
-                rounded-xl
+                rounded-[8px]
                 p-3
               "
               placeholder="+91 9876543210"
@@ -162,7 +138,7 @@ export default function ProfileForm({
         bg-zinc-800
         border
         border-zinc-700
-        rounded-xl
+        rounded-[8px]
         p-3
       "
             />
@@ -211,6 +187,33 @@ export default function ProfileForm({
           <div className="text-green-500 font-semibold">Active</div>
         </div>
       </div>
+        <div className="mt-2">
+      {!editing ? (
+          <button
+            onClick={() => setEditing(true)}
+            className="bg-blue-600 hover:bg-blue-700 text-[14px] transition px-3 py-2 rounded-[8px] text-white"
+          >
+            Edit Profile
+          </button>
+        ) : (
+          <div className="flex gap-2">
+            <button
+              onClick={() => setEditing(false)}
+              className="bg-zinc-700  text-[14px] transition px-3 py-2 rounded-[8px]"
+            >
+              Cancel
+            </button>
+
+            <button
+              onClick={saveProfile}
+              disabled={loading}
+              className="bg-green-600 text-[14px] transition px-3 py-2 rounded-[8px] text-white"
+            >
+              {loading ? "Saving..." : "Save"}
+            </button>
+          </div>
+        )}
+        </div>  
     </div>
   );
 }
