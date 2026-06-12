@@ -77,7 +77,7 @@ export default async function ProfilePage() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto p-3 pt-[100px] pb-28">
+    <div className="max-w-7xl mx-auto p-3 pt-[70px] pb-28">
 
       {/* Profile Header */}
       <div className="bg-gradient-to-r from-violet-600 to-blue-600 rounded-[16px] p-3 text-white">
@@ -165,7 +165,7 @@ export default async function ProfilePage() {
 
       {/* Quick Actions */}
       <div className="mt-3 bg-zinc-900 border border-zinc-800 rounded-[16px] p-3">
-        <h2 className="text-[16px] font-bold mb-3">
+        <h2 className="text-[16px] mb-3">
           Quick Actions
         </h2>
 

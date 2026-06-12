@@ -30,7 +30,7 @@ export default function SettlementSummary({
 
       {/* Summary */}
       <div className="bg-zinc-900 rounded-[16px] p-3 border border-zinc-800">
-        <h2 className="text-[16px] font-bold mb-3">
+        <h2 className="text-[16px] mb-3">
           Settlement Summary
         </h2>
 
@@ -75,7 +75,7 @@ export default function SettlementSummary({
 
       {/* Settlements */}
       <div className="bg-zinc-900 rounded-[16px] p-3 border border-zinc-800">
-        <h2 className="text-[16px] font-bold mb-3">
+        <h2 className="text-[16px] mb-3">
           Who Pays Whom
         </h2>
 

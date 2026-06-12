@@ -44,7 +44,6 @@ export default function TripTabs({
               py-2
               rounded-[8px]
               text-sm
-              font-semibold
               transition
               ${
                 activeTab ===
@@ -67,7 +66,6 @@ export default function TripTabs({
               py-2
               rounded-[8px]
               text-sm
-              font-semibold
               transition
               ${
                 activeTab ===
@@ -90,7 +88,6 @@ export default function TripTabs({
               py-2
               rounded-[8px]
               text-sm
-              font-semibold
               transition
               ${
                 activeTab ===

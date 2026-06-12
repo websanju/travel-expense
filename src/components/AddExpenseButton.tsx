@@ -17,7 +17,7 @@ export default function AddExpenseButton({
       <button
         onClick={() => setOpen(true)}
         className="
-         w-full mb-3 py-3 rounded-[8px] text-[14px] text-white font-semibold bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-[1.01] transition disabled:opacity-50 disabled:cursor-not-allowed
+         w-full mb-3 py-2 rounded-[8px] text-[14px] text-white bg-gradient-to-r from-green-500 to-emerald-600  transition disabled:opacity-50 disabled:cursor-not-allowed
         "
       >
         + Add Expense

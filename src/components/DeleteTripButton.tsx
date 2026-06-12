@@ -37,7 +37,7 @@ export default function DeleteTripButton({
   return (
     <button
       onClick={handleDelete}
-      className="bg-red-600 text-white px-4 py-2 w-full rounded rounded-2xl"
+      className="bg-red-600 text-white px-4 py-2 w-full rounded-[8px] text-[14px]"
     >
       Delete Trip
     </button>

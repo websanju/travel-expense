@@ -70,7 +70,7 @@ export default function ShareSettlementButton({
         rounded-[8px]
         bg-green-600
         text-white
-        font-semibold
+       
         text-[14px]
       "
     >

@@ -106,7 +106,6 @@ export default function ShareSettlementPDF({
         rounded-[8px]
         bg-green-600
         text-white
-        font-semibold
         hover:bg-green-700
         transition
         text-[14px]

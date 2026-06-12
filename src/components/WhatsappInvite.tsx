@@ -53,7 +53,7 @@ export default function WhatsappInvite({
           text-white
           px-6
           py-2
-          text-white font-semibold disabled:opacity-50 text-[14px] rounded-[8px]
+          text-white disabled:opacity-50 text-[14px] rounded-[8px]
           w-full
         "
       >
